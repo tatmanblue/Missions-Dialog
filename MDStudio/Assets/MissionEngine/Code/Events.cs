@@ -1,7 +1,8 @@
 ﻿using TatmanGames.Missions.Interfaces;
 
-namespace TatmanGames.Missions.MissionEngine.Code
+namespace TatmanGames.Missions
 {
+    public delegate void MissionEngineInitialized();
     public delegate void MissionStarted(IMission m);
 
     public delegate void MissionCompleted(IMission m);

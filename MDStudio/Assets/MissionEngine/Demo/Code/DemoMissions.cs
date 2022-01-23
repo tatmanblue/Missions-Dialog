@@ -1,6 +1,6 @@
 ﻿using TatmanGames.Missions.Interfaces;
 
-namespace TatmanGames.Missions.Demo.Code
+namespace TatmanGames.Missions.Demo
 {
     public class Mission1 : IMission
     {
