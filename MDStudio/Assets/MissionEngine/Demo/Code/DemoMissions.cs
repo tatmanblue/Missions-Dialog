@@ -2,6 +2,9 @@
 
 namespace TatmanGames.Missions.Demo
 {
+    /**
+     * Hardcoded missions for demo purposes
+     */
     public class Mission1 : IMission
     {
         public int Id { get; private set; } = 1;
@@ -18,5 +21,14 @@ namespace TatmanGames.Missions.Demo
         public string Uuid { get; private set; } = string.Empty;
         public string Name { get; private set; } = "Mission Two";
         public string Description { get; private set; } = "This is the next mission, after the first one";
+    }
+    
+    public class Mission3 : IMission
+    {
+        public int Id { get; private set; } = 3;
+        public int ParentId { get; private set; } = 2;
+        public string Uuid { get; private set; } = string.Empty;
+        public string Name { get; private set; } = "Mission 3";
+        public string Description { get; private set; } = "This is the third mission in the series. And for now its the last but if another one is added this text could be wrong";
     }
 }

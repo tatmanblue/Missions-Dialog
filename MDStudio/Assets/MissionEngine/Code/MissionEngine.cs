@@ -19,7 +19,11 @@ namespace TatmanGames.Missions
 
             if (null != MissionServiceLocator.Instance.PlayerData)
             {
-                ActiveMission = loader.ReadMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionId);
+                ActiveMission = loader?.ReadMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionId);
+                if (null != ActiveMission)
+                {
+                    FireMissionLoaded();
+                }
             }
                 
         }
@@ -31,6 +35,14 @@ namespace TatmanGames.Missions
             if (null == initialized) return;
 
             initialized();
+        }
+
+        private void FireMissionLoaded()
+        {
+            MissionStarted started = OnMissionLoaded;
+            if (null == started) return;
+
+            started(ActiveMission);
         }
     }
 }

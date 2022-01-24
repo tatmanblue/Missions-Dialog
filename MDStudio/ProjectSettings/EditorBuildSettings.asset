@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MissionEngine/Demo/Scenes/MissionDemo.unity
+    guid: c3fb82dd6ba55104bb7690d9f8cdfc8d
   m_configObjects: {}
