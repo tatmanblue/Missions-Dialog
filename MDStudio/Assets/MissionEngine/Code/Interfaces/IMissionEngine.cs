@@ -9,6 +9,9 @@ namespace TatmanGames.Missions.Interfaces
 
 		event MissionStarted OnMissionLoaded;
 		event MissionEngineInitialized OnEngineInitialized;
+		event MissionCompleted OnMissionCompleted;
+		event MissionEngineStopped OnMissionEngineStopped;
 		void Initialize();
+		void CompleteActiveMission();
 	}
 }
