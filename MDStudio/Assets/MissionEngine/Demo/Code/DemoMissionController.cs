@@ -26,9 +26,10 @@ namespace TatmanGames.Missions.Demo
             MissionServiceLocator.Instance.PlayerData = new DemoPlayerData();
             IMissionEngine engine = MissionServiceLocator.Instance.Engine;
             
-            engine.OnMissionLoaded += OnMissionLoaded;
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
+            engine.OnMissionStarted += OnMissionStarted;
+            engine.OnMissionStepStarted += OnMissionStepStarted;
             engine.OnMissionCompleted += OnMissionCompleted;
             engine.Initialize();
         }
@@ -47,13 +48,18 @@ namespace TatmanGames.Missions.Demo
 
         }
 
-        private void OnMissionLoaded(IMission m)
+        private void OnMissionStarted(IMission m)
         {
             missionState.text = $"{m.Name} is active mission.";
             missionName.text = m.Name;
             missionDesc.text = m.Description;
         }
 
+        private void OnMissionStepStarted(IMissionStep s)
+        {
+            
+        }
+        
         private void OnMissionEngineInitialized()
         {
             engineState.text = "Engine is started";

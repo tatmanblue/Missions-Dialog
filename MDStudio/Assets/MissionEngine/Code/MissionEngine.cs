@@ -5,12 +5,15 @@ namespace TatmanGames.Missions
 {
     public class MissionEngine : IMissionEngine
     {
-        public IMission ActiveMission { get; private set; }
+        public MissionEngineStates State { get; private set; } = MissionEngineStates.Stopped;
+        public IMission ActiveMission { get; private set; } = null;
+        public IMissionStep ActiveStep { get; private set; } = null;
         public List<IMission> AllMissions { get; private set; }
         
-        public event MissionStarted OnMissionLoaded;
-        public event MissionEngineInitialized OnEngineInitialized;
+        public event MissionStarted OnMissionStarted;
+        public event MissionStepStarted OnMissionStepStarted;
         public event MissionCompleted OnMissionCompleted;
+        public event MissionEngineInitialized OnEngineInitialized;
         public event MissionEngineStopped OnMissionEngineStopped;
         
         public void Initialize()
@@ -30,9 +33,23 @@ namespace TatmanGames.Missions
                 if (null != ActiveMission)
                 {
                     FireMissionLoaded();
+                    ProcessActiveMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionStepId);
                 }
             }
-                
+        }
+
+        private void ProcessActiveMission(int stepId = 1)
+        {
+
+            if (0 == ActiveMission.Steps.Count) return;
+
+            ActiveStep = ActiveMission.Steps.Find(s =>
+                s.Id == stepId);
+
+            if (null == ActiveStep) return;
+
+            FireMissionStepLoaded();
+            
         }
         
         public void CompleteActiveMission()
@@ -51,27 +68,19 @@ namespace TatmanGames.Missions
             if (activeMissionIndex >= AllMissions.Count)
             {
                 ActiveMission = null;
+                ActiveStep = null;
                 FireMissionEngineStopped();
                 return;
             }
 
             ActiveMission = AllMissions[activeMissionIndex];
-            
             FireMissionLoaded();
-        }
-
-        private void FireEngineInitialized()
-        {
-            MissionEngineInitialized initialized = OnEngineInitialized;
-
-            if (null == initialized) return;
-
-            initialized();
+            ProcessActiveMission();
         }
 
         private void FireMissionLoaded()
         {
-            MissionStarted started = OnMissionLoaded;
+            MissionStarted started = OnMissionStarted;
             if (null == started) return;
 
             started(ActiveMission);
@@ -85,10 +94,29 @@ namespace TatmanGames.Missions
             completed(ActiveMission);
         }
 
+        private void FireMissionStepLoaded()
+        {
+            MissionStepStarted stepStarted = OnMissionStepStarted;
+            if (null == stepStarted) return;
+
+            stepStarted(ActiveStep);
+        }
+        
+        private void FireEngineInitialized()
+        {
+            MissionEngineInitialized initialized = OnEngineInitialized;
+
+            if (null == initialized) return;
+
+            State = MissionEngineStates.Started;
+            initialized();
+        }
+        
         private void FireMissionEngineStopped()
         {
             MissionEngineStopped stopped = OnMissionEngineStopped;
             if (null == stopped) return;
+            State = MissionEngineStates.Stopped;
             stopped();
         }
     }

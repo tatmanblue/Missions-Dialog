@@ -5,6 +5,7 @@
     /// </summary>
     public interface IMissionPlayerData
     {
-        int ActiveMissionId { get; }        
+        int ActiveMissionId { get; }   
+        int ActiveMissionStepId { get; }
     }
 }
