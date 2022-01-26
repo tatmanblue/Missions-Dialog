@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TatmanGames.Missions.Interfaces
 {
@@ -9,6 +10,7 @@ namespace TatmanGames.Missions.Interfaces
         string Uuid { get; }
         string Name { get; }
         string Description { get; }
+        List<IMissionStep> Steps { get; }
 
         bool IsCompleted();
     }

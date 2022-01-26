@@ -56,6 +56,7 @@ namespace TatmanGames.Missions
             }
 
             ActiveMission = AllMissions[activeMissionIndex];
+            
             FireMissionLoaded();
         }
 

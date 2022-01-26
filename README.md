@@ -5,6 +5,11 @@ Libraries for missions engine and dialog between player and NPCs.
 ## Format/Platforms
 Unity Game.   RPG/Open world style play in a modern setting.  For Windows, MacOS, Linux
 
+## Assets
+You must have these assets installed.  
+[Text Mesh Pro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html)
+[UI Builder](https://assetstore.unity.com/packages/2d/gui/ui-builder-29757)
+
 # License
 All of the files required to build the game is provided for security review, only.  By downloading, viewing, copying or otherwise accessing the project, you agree to not copy, redistribute, or transmit any of the files in the repo in any format, neither compiled, or raw, in whole or in part, or any other way.
 
