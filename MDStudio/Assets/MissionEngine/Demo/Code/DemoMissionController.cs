@@ -30,6 +30,7 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
             engine.OnMissionStarted += OnMissionStarted;
             engine.OnMissionStepStarted += OnMissionStepStarted;
+            engine.OnMissionStepCompleted += OnMissionStepCompleted;
             engine.OnMissionCompleted += OnMissionCompleted;
             engine.Initialize();
         }
@@ -56,6 +57,11 @@ namespace TatmanGames.Missions.Demo
         }
 
         private void OnMissionStepStarted(IMissionStep s)
+        {
+            
+        }
+
+        private void OnMissionStepCompleted(IMissionStep s)
         {
             
         }

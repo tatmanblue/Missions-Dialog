@@ -12,6 +12,7 @@ namespace TatmanGames.Missions
         
         public event MissionStarted OnMissionStarted;
         public event MissionStepStarted OnMissionStepStarted;
+        public event MissionStepCompleted OnMissionStepCompleted;
         public event MissionCompleted OnMissionCompleted;
         public event MissionEngineInitialized OnEngineInitialized;
         public event MissionEngineStopped OnMissionEngineStopped;
@@ -36,20 +37,6 @@ namespace TatmanGames.Missions
                     ProcessActiveMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionStepId);
                 }
             }
-        }
-
-        private void ProcessActiveMission(int stepId = 1)
-        {
-
-            if (0 == ActiveMission.Steps.Count) return;
-
-            ActiveStep = ActiveMission.Steps.Find(s =>
-                s.Id == stepId);
-
-            if (null == ActiveStep) return;
-
-            FireMissionStepLoaded();
-            
         }
         
         public void CompleteActiveMission()
@@ -78,6 +65,41 @@ namespace TatmanGames.Missions
             ProcessActiveMission();
         }
 
+        public void CompleteActiveMissionStep()
+        {
+            if (null == ActiveStep)
+                throw new MissionEngineError("there is not an active mission step");
+
+            if (false == ActiveStep?.IsCompleted())
+                throw new MissionEngineError(
+                    $"mission step {ActiveStep.Id} of mission {ActiveMission.Id} is not complete");
+
+            FireMissionStepCompleted();
+            int activeStepIndex = ActiveMission.Steps.IndexOf(ActiveStep) + 1;
+            if (activeStepIndex >= ActiveMission.Steps.Count)
+            {
+                ActiveStep = null;
+                CompleteActiveMission();
+                return;
+            }
+
+            ActiveStep = ActiveMission.Steps[activeStepIndex];
+            FireMissionStepLoaded();
+        }
+        
+        private void ProcessActiveMission(int stepId = 1)
+        {
+
+            if (0 == ActiveMission.Steps.Count) return;
+
+            ActiveStep = ActiveMission.Steps.Find(s =>
+                s.Id == stepId);
+
+            if (null == ActiveStep) return;
+
+            FireMissionStepLoaded();
+            
+        }
         private void FireMissionLoaded()
         {
             MissionStarted started = OnMissionStarted;
@@ -100,6 +122,14 @@ namespace TatmanGames.Missions
             if (null == stepStarted) return;
 
             stepStarted(ActiveStep);
+        }
+
+        private void FireMissionStepCompleted()
+        {
+            MissionStepCompleted stepCompleted = OnMissionStepCompleted;
+            if (null == stepCompleted) return;
+
+            stepCompleted(ActiveStep);
         }
         
         private void FireEngineInitialized()
