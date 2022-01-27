@@ -2,8 +2,12 @@
 
 Libraries for missions engine and dialog between player and NPCs.
 
+## Projects 
+Projects are exported from this project as unity assets and imported into consumer projects.  
+[Mission Engine](https://github.com/tatmanblue/Missions-Dialog/tree/main/MDStudio/Assets/MissionEngine)
+
 ## Format/Platforms
-Unity Game.   RPG/Open world style play in a modern setting.  For Windows, MacOS, Linux
+Unity Game.   
 
 ## Assets
 You must have these assets installed.  
