@@ -15,6 +15,8 @@ namespace TatmanGames.Missions.Demo
         [SerializeField] private TMP_Text missionState;
         [SerializeField] private TMP_Text missionName;
         [SerializeField] private TMP_Text missionDesc;
+        [SerializeField] private TMP_Text stepName;
+        [SerializeField] private TMP_Text stepDesc;
         #endregion
         
         private void Awake()
@@ -46,7 +48,8 @@ namespace TatmanGames.Missions.Demo
             missionState.text = $"there are no active missions";
             missionName.text = "";
             missionDesc.text = "";
-
+            stepName.text = "";
+            stepDesc.text = "";
         }
 
         private void OnMissionStarted(IMission m)
@@ -58,12 +61,14 @@ namespace TatmanGames.Missions.Demo
 
         private void OnMissionStepStarted(IMissionStep s)
         {
-            
+            stepName.text = s.Name;
+            stepDesc.text = s.Description;
         }
 
         private void OnMissionStepCompleted(IMissionStep s)
         {
-            
+            stepName.text = "";
+            stepDesc.text = "";
         }
         
         private void OnMissionEngineInitialized()
@@ -77,6 +82,11 @@ namespace TatmanGames.Missions.Demo
         public void FireMissionCompleteEvent()
         {
             MissionServiceLocator.Instance.Engine?.CompleteActiveMission();
+        }
+
+        public void FireStepCompleteEvent()
+        {
+            MissionServiceLocator.Instance.Engine?.CompleteActiveMissionStep();
         }
     }
 }

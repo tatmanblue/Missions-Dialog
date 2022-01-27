@@ -91,7 +91,8 @@ namespace TatmanGames.Missions.Demo
         public int MissionId { get; } = 2;
         public string Uuid { get; private set; } = string.Empty;
         public string Name { get; private set; } = "Step 1";
-        public string Description { get; private set; } = "Mission has this step to complete before completing the mission";
+        public string Description { get; private set; } = @"Mission has this step to complete before completing the mission.  
+               Completing this step will cause the mission to complete and the next mission becomes active.";
         
         public bool IsCompleted()
         {
