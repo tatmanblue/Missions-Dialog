@@ -10,8 +10,8 @@ Projects are exported from this project as unity assets and imported into consum
 Unity Game.   
 
 ## Assets
-You must have these assets installed prior to opening any of scenes.   In house assets are built by bulding and exporting the asset.  3rd party assets must be
-purchased from the vendor (links provided).
+You must have the 3rd party assets installed prior to opening any of scenes.   In house assets are built by bulding and exporting the asset and are checked into the repo.
+3rd party assets must be purchased from the vendor (links provided).
 
 ### In house Assets  
 [Character Controller](https://github.com/tatmanblue/Unity-Characters/tree/main/CharacterStudio/Assets/Character)
@@ -36,4 +36,4 @@ On-going/Active
 
 This library is in prototype, early development stage.
 
-edited: 2022.01.16
+edited: 2022.02.12
