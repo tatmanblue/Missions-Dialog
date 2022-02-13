@@ -9,16 +9,21 @@ namespace TatmanGames.Character.NPC
     /// applied to a prefab in a scene, an awake it will
     /// find all prefabs with INPCEngine.SpawnTag set up the NPCs
     /// </summary>
-    public class NPCSpawnController : MonoBehaviour
+    public class NPCSpawnStartupController : MonoBehaviour, INpcSpawnController
     {
+        private INpcEngine engine = null;
         private void Awake()
         {
-            if (null == NPCServiceLocator.Instance.Engine)
-                NPCServiceLocator.Instance.Engine = new NPCEngine();
+            if (null == NpcServiceLocator.Instance.Engine)
+                NpcServiceLocator.Instance.Engine = new NPCEngine();
 
-            INpcEngine engine = NPCServiceLocator.Instance.Engine;
+            if (null == NpcServiceLocator.Instance.Controller)
+                NpcServiceLocator.Instance.Controller = this;
             
-            GameObject[] respawns = GameObject.FindGameObjectsWithTag(engine?.SpawnTag);
+            engine = NpcServiceLocator.Instance.Engine;
+            INpcSpawnController controller = NpcServiceLocator.Instance.Controller;
+            
+            GameObject[] respawns = controller.GetAllNpcSpawnPoints();
             if (null == respawns)
                 return;
             
@@ -32,10 +37,22 @@ namespace TatmanGames.Character.NPC
                     continue;
                 }
                 
+                if (false == controller?.CanSpawnAtStartup(data))
+                    continue;
+                
                 Debug.Log($"Spawning {data.Data.Id}");
-                // Instantiate(data.Data.NPCAvatar, pointData.transform.position, pointData.transform.rotation);
                 engine?.Instantiate(pointData, data);
             }
+        }
+
+        public bool CanSpawnAtStartup(INpcSpawnPoint point)
+        {
+            return true;
+        }
+
+        public GameObject[] GetAllNpcSpawnPoints()
+        {
+            return GameObject.FindGameObjectsWithTag(engine?.SpawnTag);
         }
     }
 }

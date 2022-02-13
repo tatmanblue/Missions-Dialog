@@ -2,7 +2,7 @@
    "description": "provides character code",
    "displayName": "Tatman Games Character Kit",
    "name": "com.tatman-games.character",
-   "version": "0.0.1",
+   "version": "0.0.2",
    "unity": "2020.3",
   "author": {
     "name": "Matt Raffel",
