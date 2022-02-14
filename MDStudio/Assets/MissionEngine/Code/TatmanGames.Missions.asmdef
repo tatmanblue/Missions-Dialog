@@ -1,7 +1,7 @@
 {
     "name": "TatmanGames.Missions",
     "rootNamespace": "TatmanGames.Missions",
-    "references": [],
+    "references": [ "TatmanGames.Character"],
     "includePlatforms": [
         "Editor",
         "LinuxStandalone64",
