@@ -30,7 +30,7 @@ namespace TatmanGames.Character.NPC
             Debug.Log($"found {respawns?.Length} spawn points");
             foreach (GameObject pointData in respawns)
             {
-                NPCSpawnPoint data = pointData.GetComponent<NPCSpawnPoint>();
+                INpcSpawnPoint data = pointData.GetComponent<INpcSpawnPoint>();
                 if (null == data)
                 {
                     Debug.Log("failed to find INPCSpawnData");
