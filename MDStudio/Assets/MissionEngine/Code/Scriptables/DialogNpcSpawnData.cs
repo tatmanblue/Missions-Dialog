@@ -7,7 +7,7 @@ using UnityEngine;
 namespace TatmanGames.Missions.Scriptables
 {
     [CreateAssetMenu(fileName = "DialogSpawnData", menuName = "Tatman Games/Characters/Dialog NPC Spawn")]
-    public class DialogNpcSpawnPoint : ScriptableObject, INpcSpawnData//, IDialogNpcSpawnData
+    public class DialogNpcSpawnData : ScriptableObject, INpcSpawnData, IDialogNpcSpawnData
     {
         public int Id
         {
