@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1452837403685044506}
-  - component: {fileID: 1452837403685044507}
+  - component: {fileID: -4996640079447581029}
   m_Layer: 0
-  m_Name: NpcSpawnPoint
+  m_Name: DialogNpcSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1452837403685044507
+--- !u!114 &-4996640079447581029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1452837403685044508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39917349f1ad43d0af2d0f357dc840df, type: 3}
+  m_Script: {fileID: 11500000, guid: 0734ad72da004b96a979372b4a7064d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnData: {fileID: 0}
