@@ -15,6 +15,7 @@ namespace TatmanGames.Character.Interfaces
         /// keep it unique so that consumers can identity the npc instance easily
         /// </summary>
         int Id { get; }
+        bool DestroyPointOnSpawn { get; }
         GameObject NpcAvatar { get; }
     }
 }

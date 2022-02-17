@@ -24,6 +24,11 @@ namespace TatmanGames.Character.Scriptables
             }
         }
 
+        public bool DestroyPointOnSpawn
+        {
+            get { return true; }
+        }
+
 
         [SerializeField] private int id;
         [SerializeField] private GameObject npcAvatar;

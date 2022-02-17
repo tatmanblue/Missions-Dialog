@@ -12,13 +12,18 @@ namespace TatmanGames.Character.NPC
     public class NPCSpawnStartupController : MonoBehaviour, INpcSpawnController
     {
         private INpcEngine engine = null;
-        private void Awake()
-        {
-            if (null == NpcServiceLocator.Instance.Engine)
-                NpcServiceLocator.Instance.Engine = new NPCEngine();
+        private bool hasLoaded = false;
 
-            if (null == NpcServiceLocator.Instance.Controller)
-                NpcServiceLocator.Instance.Controller = this;
+        private void Update()
+        {
+            if (hasLoaded == true) return;
+            hasLoaded = true;
+            StartCoroutine("SpawnNpcs");
+        }
+
+        private void SpawnNpcs()
+        {
+            InitializeDefaults();
             
             engine = NpcServiceLocator.Instance.Engine;
             INpcSpawnController controller = NpcServiceLocator.Instance.Controller;
@@ -42,7 +47,23 @@ namespace TatmanGames.Character.NPC
                 
                 Debug.Log($"Spawning {data.Data.Id}");
                 engine?.Instantiate(pointData, data);
+                
+                if (true == data.Data.DestroyPointOnSpawn)
+                    Destroy(pointData);
             }
+        }
+
+        /// <summary>
+        /// consumers should use another means for initializing which implementations they need.
+        /// this is here to ensure something works.
+        /// </summary>
+        private void InitializeDefaults()
+        {
+            if (null == NpcServiceLocator.Instance.Engine)
+                NpcServiceLocator.Instance.Engine = new NPCEngine();
+
+            if (null == NpcServiceLocator.Instance.Controller)
+                NpcServiceLocator.Instance.Controller = this;
         }
 
         public bool CanSpawnAtStartup(INpcSpawnPoint point)

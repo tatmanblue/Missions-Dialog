@@ -14,6 +14,11 @@ namespace TatmanGames.Missions.Scriptables
             get { return id; }
         }
 
+        public bool DestroyPointOnSpawn
+        {
+            get { return true; }
+        }
+
         public GameObject NpcAvatar {
             get
             {
@@ -28,8 +33,7 @@ namespace TatmanGames.Missions.Scriptables
                 return automaticSpawning;
             }
         }
-
-
+        
         [SerializeField] private int id;
         [SerializeField] private GameObject npcAvatar;
         [SerializeField] private bool automaticSpawning;
