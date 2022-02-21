@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,17 +9,29 @@ namespace TatmanGames.Missions.Demo
     /// 
     /// </summary>
     public class UIBehaviors : MonoBehaviour
-    {
+    {        
         public void Quit()
         {
             Application.Quit(0);
         }
         
         private bool handlingKey = false;
+        [SerializeField] private TMP_Text Text;
         
         // Update is called once per frame
         private void Update()
         {
+            if (true == Input.GetKey(KeyCode.W))
+            {
+                if (null == Text)
+                    return;
+                
+                Text.text = "got w";
+            }
+
+            if (Text != null)
+                Text.text = string.Empty;
+            
             if (true == Input.GetKey(KeyCode.Escape))
             {
                 if (SceneManager.GetActiveScene().name.Contains("Menu"))
