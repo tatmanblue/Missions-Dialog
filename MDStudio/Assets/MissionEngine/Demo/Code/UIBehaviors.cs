@@ -1,12 +1,76 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TatmanGames.Missions.Demo
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UIBehaviors : MonoBehaviour
     {
         public void Quit()
         {
             Application.Quit(0);
         }
+        
+        private bool handlingKey = false;
+        
+        // Update is called once per frame
+        private void Update()
+        {
+            if (true == Input.GetKey(KeyCode.Escape))
+            {
+                if (SceneManager.GetActiveScene().name.Contains("Menu"))
+                    Application.Quit(0);
+                else
+                    SceneManager.LoadScene("Menu");
+            }
+
+            if (true == Input.GetKey(KeyCode.Alpha1) && 
+                true == SceneManager.GetActiveScene().name.Contains("Menu"))
+            {
+                ShowScene(1);
+            }
+
+            
+            if (true == Input.GetKey(KeyCode.Alpha2) && 
+                true == SceneManager.GetActiveScene().name.Contains("Menu"))
+            {
+                ShowScene(2);
+            }
+            
+            if (true == Input.GetKey(KeyCode.Space) && 
+                true == Input.GetKey(KeyCode.Return) &&
+                false == handlingKey)
+            {
+                handlingKey = true;
+                Debug.Log("got space + enter");
+                StartCoroutine("ChangeScreen");
+            }
+        }
+
+        private IEnumerator ChangeScreen()
+        {
+            Screen.fullScreen = !Screen.fullScreen;
+            yield return null;
+            handlingKey = false;
+            yield return null;
+        }
+
+        public void ShowScene(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    SceneManager.LoadScene("MissionDemo");
+                    break;
+                case 2:
+                    SceneManager.LoadScene("UMAMissionInteractions");
+                    break;
+                default:
+                    break;
+            }
+        }        
     }
 }
