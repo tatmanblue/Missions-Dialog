@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TatmanGames.Character.Interfaces;
+using TatmanGames.Common;
+using TatmanGames.Common.ServiceLocator;
 using UnityEngine;
 
 namespace TatmanGames.Character.NPC
@@ -24,9 +26,9 @@ namespace TatmanGames.Character.NPC
         private void SpawnNpcs()
         {
             InitializeDefaults();
-            
-            engine = NpcServiceLocator.Instance.Engine;
-            INpcSpawnController controller = NpcServiceLocator.Instance.Controller;
+
+            engine = GlobalServicesLocator.Instance.GetServiceByName<INpcEngine>("NpcEngine");
+            INpcSpawnController controller = GlobalServicesLocator.Instance.GetServiceByName<INpcSpawnController>("NpcSpawnController");
             
             GameObject[] respawns = controller.GetAllNpcSpawnPoints();
             if (null == respawns)
@@ -59,11 +61,24 @@ namespace TatmanGames.Character.NPC
         /// </summary>
         private void InitializeDefaults()
         {
-            if (null == NpcServiceLocator.Instance.Engine)
-                NpcServiceLocator.Instance.Engine = new NPCEngine();
+            try
+            {
+                // because we can't ask if the service exists
+                GlobalServicesLocator.Instance.GetServiceByName<INpcEngine>("NpcEngine");
+            }
+            catch (ServiceLocatorException)
+            {
+                GlobalServicesLocator.Instance.AddService<INpcEngine>("NpcEngine", new NPCEngine());
+            }
 
-            if (null == NpcServiceLocator.Instance.Controller)
-                NpcServiceLocator.Instance.Controller = this;
+            try
+            {
+                GlobalServicesLocator.Instance.GetServiceByName<INpcSpawnController>("NpcSpawnController");
+            }
+            catch (ServiceLocatorException)
+            {
+                GlobalServicesLocator.Instance.AddService<INpcSpawnController>("NpcSpawnController", this);
+            }
         }
 
         public bool CanSpawnAtStartup(INpcSpawnPoint point)
