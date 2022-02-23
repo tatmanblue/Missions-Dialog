@@ -23,17 +23,33 @@ You must have the 3rd party assets installed prior to opening any of scenes.   I
 [UI Builder](https://assetstore.unity.com/packages/2d/gui/ui-builder-29757)  
 [Uma2](https://assetstore.unity.com/packages/3d/characters/uma-2-unity-multipurpose-avatar-35611)  
 
-# License
-All of the files required to build the game is provided for security review, only.  By downloading, viewing, copying or otherwise accessing the project, you agree to not copy, redistribute, or transmit any of the files in the repo in any format, neither compiled, or raw, in whole or in part, or any other way.
 
-Please see [LICENSE.md](./LICENSE.md).  
+# License
+The [license](LICENSE.md) included applies only to the files in this repo.   As the documentation states in the repo [readme.md](README.md), specific 3rd party assets are required to build and run
+the libraries and demos in this project.  The license here does not apply to 3rd party assets. You agree to purchase those assets and abide by their licensing terms. 
+
+```
+   Copyright 2022 Tatman Games Dba Matthew Raffel
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
 
 ## Legal
-If you have any questions about the content of the repository, please email [matt.raffel@gmail.com](mailto:matt.raffel@gmail.com). I can assure you all content has been purchased and licensed to me. Proof will be made available on request. Repeated DCMA counterfit and harassment claims will result in counter suits per Section 512(f) of the DMCA penalties for _misrepresentation can include actual damages and attorney’s fees_.
+If you have any questions about the content of the repository, please email [matt.raffel@gmail.com](mailto:matt.raffel@gmail.com). I can assure you all content has been developed by me or purchased and licensed to me. Proof will be made available on request. Repeated DCMA counterfit and harassment claims will result in counter suits per Section 512(f) of the DMCA penalties for _misrepresentation can include actual damages and attorney’s fees_.
 
 ## Status
 On-going/Active
 
 This library is in prototype, early development stage.
 
-edited: 2022.02.12
+edited: 2022.02.16
