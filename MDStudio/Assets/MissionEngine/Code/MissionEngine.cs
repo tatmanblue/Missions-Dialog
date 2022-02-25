@@ -24,18 +24,18 @@ namespace TatmanGames.Missions
             AllMissions?.Sort();
             FireEngineInitialized();
 
-            if (null != MissionServiceLocator.Instance.PlayerData)
-            {
-                IMission activeMission = loader?.ReadMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionId);
-                if (null == activeMission)
-                    return;
+            if (null == MissionServiceLocator.Instance.PlayerData)
+                throw new MissionEngineError("there is no PlayerData to initialize mission engine");
 
-                ActiveMission = AllMissions.Find(m => m.Id == activeMission.Id);
-                if (null != ActiveMission)
-                {
-                    FireMissionLoaded();
-                    ProcessActiveMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionStepId);
-                }
+            IMission activeMission = loader?.ReadMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionId);
+            if (null == activeMission)
+                return;
+
+            ActiveMission = AllMissions.Find(m => m.Id == activeMission.Id);
+            if (null != ActiveMission)
+            {
+                FireMissionLoaded();
+                ProcessActiveMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionStepId);
             }
         }
         
