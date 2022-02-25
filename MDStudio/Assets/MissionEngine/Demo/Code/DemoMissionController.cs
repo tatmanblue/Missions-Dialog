@@ -1,4 +1,6 @@
 ﻿using System;
+using TatmanGames.Common;
+using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using TMPro;
 using UnityEngine;
@@ -18,16 +20,27 @@ namespace TatmanGames.Missions.Demo
         [SerializeField] private TMP_Text stepName;
         [SerializeField] private TMP_Text stepDesc;
         #endregion
+
+        private IMissionEngine engine = null;
         
         private void Awake()
         {
-            if (null == MissionServiceLocator.Instance.Engine)
-                return;
+            try
+            {
+                engine = GlobalServicesLocator.Instance.GetServiceByName<IMissionEngine>(MissionServiceLocator.Engine);
+            }
+            catch (ServiceLocatorException)
+            {
+                if (null == engine)
+                {
+                    engine = new MissionEngine();
+                    GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Engine, engine);
+                }
+            }
 
-            MissionServiceLocator.Instance.Loader = new DemoMissionLoader();
-            MissionServiceLocator.Instance.PlayerData = new DemoPlayerData();
-            IMissionEngine engine = MissionServiceLocator.Instance.Engine;
-            
+            GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, new DemoMissionLoader());
+            GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
+
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
             engine.OnMissionStarted += OnMissionStarted;
@@ -81,12 +94,12 @@ namespace TatmanGames.Missions.Demo
          */
         public void FireMissionCompleteEvent()
         {
-            MissionServiceLocator.Instance.Engine?.CompleteActiveMission();
+            engine?.CompleteActiveMission();
         }
 
         public void FireStepCompleteEvent()
         {
-            MissionServiceLocator.Instance.Engine?.CompleteActiveMissionStep();
+            engine?.CompleteActiveMissionStep();
         }
     }
 }

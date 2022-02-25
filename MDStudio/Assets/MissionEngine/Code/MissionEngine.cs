@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 
 namespace TatmanGames.Missions
@@ -19,15 +20,17 @@ namespace TatmanGames.Missions
         
         public void Initialize()
         {
-            IMissionLoader loader = MissionServiceLocator.Instance.Loader;
+            IMissionLoader loader = GlobalServicesLocator.Instance.GetServiceByName<IMissionLoader>(MissionServiceLocator.Loader);
+            IMissionPlayerData playerData =
+                GlobalServicesLocator.Instance.GetServiceByName<IMissionPlayerData>(MissionServiceLocator.PlayerData); 
+            if (null == playerData)
+                throw new MissionEngineError("there is no PlayerData to initialize mission engine");
+            
             AllMissions = loader?.ReadAllMissions();
             AllMissions?.Sort();
             FireEngineInitialized();
-
-            if (null == MissionServiceLocator.Instance.PlayerData)
-                throw new MissionEngineError("there is no PlayerData to initialize mission engine");
-
-            IMission activeMission = loader?.ReadMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionId);
+            
+            IMission activeMission = loader?.ReadMission(playerData.ActiveMissionId);
             if (null == activeMission)
                 return;
 
@@ -35,7 +38,7 @@ namespace TatmanGames.Missions
             if (null != ActiveMission)
             {
                 FireMissionLoaded();
-                ProcessActiveMission(MissionServiceLocator.Instance.PlayerData.ActiveMissionStepId);
+                ProcessActiveMission(playerData.ActiveMissionStepId);
             }
         }
         
