@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace TatmanGames.Missions.Scriptables
 {
+    /// <summary>
+    /// TODO: there is a circular reference here that I do not like
+    /// </summary>
     [CreateAssetMenu(fileName = "MissionStep", menuName = "Tatman Games/Characters/Mission Step")]
-    public class MissionStep : ScriptableObject, IMissionStep
+    public class MissionStepData : ScriptableObject, IMissionStep
     {
         #region IMission properties
         public int Id => id;
@@ -34,8 +37,8 @@ namespace TatmanGames.Missions.Scriptables
         #region Scriptable data
 
         [SerializeField] private int id = 1;
-        [SerializeField] private MissionStep parent;
-        [SerializeField] private Mission mission;
+        [SerializeField] private MissionStepData parent;
+        [SerializeField] private MissionData mission;
         [SerializeField] private string uuid = Guid.NewGuid().ToString();
         [SerializeField] private string missionStepName;
         [SerializeField] private string description;

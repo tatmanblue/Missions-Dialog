@@ -6,37 +6,25 @@ using UnityEngine;
 namespace TatmanGames.Missions.Scriptables
 {
     [CreateAssetMenu(fileName = "Mission", menuName = "Tatman Games/Characters/Mission")]
-    public class Mission : ScriptableObject, IMission
+    public class MissionData : ScriptableObject, IMission
     {
         #region IMission properties
-        public int Id
-        {
-            get { return 0; }
-        }
-        
-        public int ParentId
-        {
-            get { return 0; }
-        }
+        public int Id => id;
 
-        public string Uuid
-        {
-            get { return ""; }
-        }
+        public int ParentId => (null == parent ? -1: parent.Id);
 
-        public string Name
-        {
-            get { return ""; }
-        }
+        public string Uuid => uuid;
 
-        public string Description
-        {
-            get { return ""; }
-        }
+        public string Name => missionName;
+
+        public string Description => description;
 
         public List<IMissionStep> Steps
         {
-            get { return null; }
+            get
+            {
+                return GetSteps();
+            }
         }
         
         public bool IsCompleted()
@@ -53,12 +41,23 @@ namespace TatmanGames.Missions.Scriptables
         #region Scriptable data
 
         [SerializeField] private int id = 1;
-        [SerializeField] private Mission parent;
+        [SerializeField] private MissionData parent;
         [SerializeField] private string uuid = Guid.NewGuid().ToString();
         [SerializeField] private string missionName;
         [SerializeField] private string description;
-        [SerializeField] private List<MissionStep> steps = new List<MissionStep>();
+        [SerializeField] private List<MissionStepData> steps = new List<MissionStepData>();
 
         #endregion
+
+        private List<IMissionStep> GetSteps()
+        {
+            List<IMissionStep> list = new List<IMissionStep>();
+
+            foreach (var step in steps)
+            {
+                list.Add(step);
+            }
+            return list;
+        }
     }
 }
