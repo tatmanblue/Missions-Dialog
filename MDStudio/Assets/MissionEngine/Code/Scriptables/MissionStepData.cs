@@ -30,7 +30,13 @@ namespace TatmanGames.Missions.Scriptables
         
         public int CompareTo(object obj)
         {
-            throw new System.NotImplementedException();
+            IMissionStep compare = obj as IMissionStep;
+            if (this.Id < compare.Id)
+                return -1;
+            if (this.Id > compare.Id)
+                return 1;
+
+            return 0;
         }
         #endregion
         
