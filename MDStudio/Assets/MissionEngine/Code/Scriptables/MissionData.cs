@@ -44,7 +44,7 @@ namespace TatmanGames.Missions.Scriptables
         [SerializeField] private MissionData parent;
         [SerializeField] private string uuid = Guid.NewGuid().ToString();
         [SerializeField] private string missionName;
-        [SerializeField] private string description;
+        [TextArea(3, 10)][SerializeField] private string description;
         [SerializeField] private List<MissionStepData> steps = new List<MissionStepData>();
 
         #endregion
