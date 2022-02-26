@@ -18,6 +18,7 @@ You must have the 3rd party assets installed prior to opening any of scenes.   I
 
 ### 3rd Party Assets
 [Cinemachine](https://docs.unity3d.com/Packages/com.unity.cinemachine@2.6/manual/index.html)  
+[Clean & Minimalist UI](https://assetstore.unity.com/packages/2d/gui/clean-minimalist-gui-pack-75123)  
 [Dialog System](https://assetstore.unity.com/packages/tools/ai/dialogue-system-for-unity-11672)  
 [Text Mesh Pro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html)  
 [UI Builder](https://assetstore.unity.com/packages/2d/gui/ui-builder-29757)  

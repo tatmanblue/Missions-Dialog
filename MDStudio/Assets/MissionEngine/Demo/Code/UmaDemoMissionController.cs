@@ -12,6 +12,7 @@ namespace TatmanGames.Missions.Demo
     {
         [SerializeField] private List<MissionData> missions = new List<MissionData>();
         [SerializeField] private TMP_Text missionState;
+        [SerializeField] private GameObject missionDialog;
         
         private IMissionEngine engine = null;
         private void Awake()
