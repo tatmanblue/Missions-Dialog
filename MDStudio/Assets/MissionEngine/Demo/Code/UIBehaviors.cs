@@ -9,12 +9,7 @@ namespace TatmanGames.Missions.Demo
     /// 
     /// </summary>
     public class UIBehaviors : MonoBehaviour
-    {        
-        public void Quit()
-        {
-            Application.Quit(0);
-        }
-        
+    {
         private bool handlingKey = false;
         [SerializeField] private TMP_Text Text;
         
@@ -77,7 +72,7 @@ namespace TatmanGames.Missions.Demo
                 if (null == Text)
                     return;
                 
-                Text.text = "moving forward";
+                SetMovingMessage("moving forward");
             }
         }
         
@@ -88,7 +83,12 @@ namespace TatmanGames.Missions.Demo
 
             Text.text = msg;
         }
-
+        
+        public void Quit()
+        {
+            Application.Quit(0);
+        }
+        
         public void ShowScene(int id)
         {
             switch (id)

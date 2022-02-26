@@ -3,6 +3,7 @@ using TatmanGames.Common;
 using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using TatmanGames.Missions.Scriptables;
+using TatmanGames.ScreenUI.Interfaces;
 using TatmanGames.ScreenUI.UI;
 using TMPro;
 using UnityEngine;
@@ -14,14 +15,19 @@ namespace TatmanGames.Missions.Demo
         [SerializeField] private List<MissionData> missions = new List<MissionData>();
         [SerializeField] private TMP_Text missionState;
         [SerializeField] private GameObject missionDialog;
+        [SerializeField] private Canvas canvas;
         
         private IMissionEngine engine = null;
+        private IPopupHandler popupHandler = null;
         private void Awake()
         {
             var dialogEvents = new PopupEventsManager();
             
             ServicesLocator services = GlobalServicesLocator.Instance;
-            services.AddService(DialogServices.PopupHandler, new PopupHandler(dialogEvents));
+            popupHandler = new PopupHandler(dialogEvents);
+            popupHandler.Canvas = canvas;
+            
+            services.AddService(DialogServices.PopupHandler, popupHandler);
             services.AddService(DialogServices.PopupEventsManager, dialogEvents);
             services.AddService(DialogServices.DialogEvents, dialogEvents);
             
@@ -53,12 +59,14 @@ namespace TatmanGames.Missions.Demo
             
         }
 
+        #region dialog events
         private bool DialogEventsOnButtonPressed(string dialogName, string buttonId)
         {
             SetMissionMessage($"mission screen proceed detected.");
             return false;
         }
-
+        #endregion
+        
         #region Mission Events
         private void OnMissionCompleted(IMission m)
         {
@@ -113,6 +121,8 @@ namespace TatmanGames.Missions.Demo
                 SetMissionMessage("showing mission dialog");
             else
                 SetMissionMessage("Showing mission dialog with step");
+            
+            popupHandler.ShowDialog(missionDialog);
         }
         #endregion
 
