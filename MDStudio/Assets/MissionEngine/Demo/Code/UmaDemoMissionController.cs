@@ -3,6 +3,7 @@ using TatmanGames.Common;
 using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using TatmanGames.Missions.Scriptables;
+using TMPro;
 using UnityEngine;
 
 namespace TatmanGames.Missions.Demo
@@ -10,6 +11,8 @@ namespace TatmanGames.Missions.Demo
     public class UmaDemoMissionController : MonoBehaviour, IMissionLoader
     {
         [SerializeField] private List<MissionData> missions = new List<MissionData>();
+        [SerializeField] private TMP_Text missionState;
+        
         private IMissionEngine engine = null;
         private void Awake()
         {
@@ -28,16 +31,52 @@ namespace TatmanGames.Missions.Demo
 
             GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, this);
             GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
-
-            /*
+            
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
             engine.OnMissionStarted += OnMissionStarted;
             engine.OnMissionStepStarted += OnMissionStepStarted;
             engine.OnMissionStepCompleted += OnMissionStepCompleted;
             engine.OnMissionCompleted += OnMissionCompleted;
-            */
             engine.Initialize();
+        }
+
+        private void OnMissionCompleted(IMission m)
+        {
+            SetMissionMessage($"mission {m.Name}({m.Id}) completed.");
+        }
+
+        private void OnMissionStepCompleted(IMissionStep s)
+        {
+            SetMissionMessage($"mission {s.Name}({s.Id}/{s.MissionId}) completed.");
+        }
+
+        private void OnMissionStepStarted(IMissionStep s)
+        {
+            SetMissionMessage($"mission {s.Name}({s.Id}/{s.MissionId}) started.");
+        }
+
+        private void OnMissionStarted(IMission m)
+        {
+            SetMissionMessage($"mission {m.Name}({m.Id}) started.");
+        }
+
+        private void OnMissionEngineStopped()
+        {
+            SetMissionMessage("mission engine stopped");
+        }
+
+        private void OnMissionEngineInitialized()
+        {
+            SetMissionMessage("mission engine initialized");
+        }
+
+        private void SetMissionMessage(string msg)
+        {
+            if (null == missionState)
+                return;
+
+            missionState.text = msg;
         }
 
         public List<IMission> ReadAllMissions()

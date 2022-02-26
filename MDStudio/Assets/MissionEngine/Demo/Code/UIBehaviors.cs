@@ -21,16 +21,7 @@ namespace TatmanGames.Missions.Demo
         // Update is called once per frame
         private void Update()
         {
-            if (true == Input.GetKey(KeyCode.W))
-            {
-                if (null == Text)
-                    return;
-                
-                Text.text = "got w";
-            }
-
-            if (Text != null)
-                Text.text = string.Empty;
+            ShowKeyPressMessage();
             
             if (true == Input.GetKey(KeyCode.Escape))
             {
@@ -69,6 +60,33 @@ namespace TatmanGames.Missions.Demo
             yield return null;
             handlingKey = false;
             yield return null;
+        }
+
+        private void ShowKeyPressMessage()
+        {
+            if (false == Input.anyKey)
+            {
+                if (Text != null)
+                    Text.text = string.Empty;
+
+                return;
+            }    
+            
+            if (true == Input.GetKey(KeyCode.W))
+            {
+                if (null == Text)
+                    return;
+                
+                Text.text = "moving forward";
+            }
+        }
+        
+        private void SetMovingMessage(string msg)
+        {
+            if (null == Text)
+                return;
+
+            Text.text = msg;
         }
 
         public void ShowScene(int id)
