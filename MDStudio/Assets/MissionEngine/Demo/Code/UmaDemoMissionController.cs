@@ -3,6 +3,7 @@ using TatmanGames.Common;
 using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using TatmanGames.Missions.Scriptables;
+using TatmanGames.ScreenUI.UI;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +18,15 @@ namespace TatmanGames.Missions.Demo
         private IMissionEngine engine = null;
         private void Awake()
         {
+            var dialogEvents = new PopupEventsManager();
+            
+            ServicesLocator services = GlobalServicesLocator.Instance;
+            services.AddService(DialogServices.PopupHandler, new PopupHandler(dialogEvents));
+            services.AddService(DialogServices.PopupEventsManager, dialogEvents);
+            services.AddService(DialogServices.DialogEvents, dialogEvents);
+            
+            dialogEvents.OnButtonPressed += DialogEventsOnButtonPressed;
+            
             try
             {
                 engine = GlobalServicesLocator.Instance.GetServiceByName<IMissionEngine>(MissionServiceLocator.Engine);
@@ -40,8 +50,16 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionStepCompleted += OnMissionStepCompleted;
             engine.OnMissionCompleted += OnMissionCompleted;
             engine.Initialize();
+            
         }
 
+        private bool DialogEventsOnButtonPressed(string dialogName, string buttonId)
+        {
+            SetMissionMessage($"mission screen proceed detected.");
+            return false;
+        }
+
+        #region Mission Events
         private void OnMissionCompleted(IMission m)
         {
             SetMissionMessage($"mission {m.Name}({m.Id}) completed.");
@@ -54,12 +72,15 @@ namespace TatmanGames.Missions.Demo
 
         private void OnMissionStepStarted(IMissionStep s)
         {
-            SetMissionMessage($"mission {s.Name}({s.Id}/{s.MissionId}) started.");
+            SetMissionMessage($"mission {s.Name}({s.MissionId}.{s.Id}) started.");
+            ShowMissionDialog(null, s);
         }
 
         private void OnMissionStarted(IMission m)
         {
             SetMissionMessage($"mission {m.Name}({m.Id}) started.");
+            if (0 == m.Steps.Count)
+                ShowMissionDialog(m, null);
         }
 
         private void OnMissionEngineStopped()
@@ -70,8 +91,14 @@ namespace TatmanGames.Missions.Demo
         private void OnMissionEngineInitialized()
         {
             SetMissionMessage("mission engine initialized");
+            IMissionPlayerData playerData =
+                GlobalServicesLocator.Instance.GetServiceByName<IMissionPlayerData>(MissionServiceLocator.PlayerData);
+            
+            playerData.Initialize();
         }
+        #endregion
 
+        #region Private methods
         private void SetMissionMessage(string msg)
         {
             if (null == missionState)
@@ -79,6 +106,15 @@ namespace TatmanGames.Missions.Demo
 
             missionState.text = msg;
         }
+
+        public void ShowMissionDialog(IMission m, IMissionStep s)
+        {
+            if (null == s)
+                SetMissionMessage("showing mission dialog");
+            else
+                SetMissionMessage("Showing mission dialog with step");
+        }
+        #endregion
 
         public List<IMission> ReadAllMissions()
         {

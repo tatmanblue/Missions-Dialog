@@ -87,6 +87,11 @@ namespace TatmanGames.Missions.Demo
         private void OnMissionEngineInitialized()
         {
             engineState.text = "Engine is started";
+            IMissionPlayerData playerData =
+                GlobalServicesLocator.Instance.GetServiceByName<IMissionPlayerData>(MissionServiceLocator.PlayerData);
+            
+            playerData.Initialize();
+            
         }
 
         /**

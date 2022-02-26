@@ -7,5 +7,7 @@
     {
         int ActiveMissionId { get; }   
         int ActiveMissionStepId { get; }
+
+        void Initialize();
     }
 }
