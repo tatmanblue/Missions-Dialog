@@ -77,7 +77,7 @@ namespace TatmanGames.Character.NPC
             }
             catch (ServiceLocatorException)
             {
-                GlobalServicesLocator.Instance.AddService<INpcSpawnController>(this);
+                GlobalServicesLocator.Instance.AddService<INpcSpawnController>( this);
             }
         }
 

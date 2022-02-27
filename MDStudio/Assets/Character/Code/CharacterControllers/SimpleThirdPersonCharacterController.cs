@@ -12,7 +12,8 @@ namespace TatmanGames.Character.CharacterControllers
         public float TurnSmoothTime = 0.1f;
 
         private float turnSmoothVelocity = 0f;
-        
+
+
         private void FixedUpdate()
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
