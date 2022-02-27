@@ -10,7 +10,7 @@ namespace TatmanGames.Missions.Demo
     {
         private void Start()
         {
-            IMissionEngine engine = GlobalServicesLocator.Instance.GetServiceByName<IMissionEngine>(MissionServiceLocator.Engine);
+            IMissionEngine engine = GlobalServicesLocator.Instance.GetService<IMissionEngine>();
             IMission mission = engine.ActiveMission;
            
             SetUIText("MissionName", mission.Name);

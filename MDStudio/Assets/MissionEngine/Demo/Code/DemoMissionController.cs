@@ -27,26 +27,19 @@ namespace TatmanGames.Missions.Demo
         {
             try
             {
-                engine = GlobalServicesLocator.Instance.GetServiceByName<IMissionEngine>(MissionServiceLocator.Engine);
+                engine = GlobalServicesLocator.Instance.GetService<IMissionEngine>();
             }
             catch (ServiceLocatorException)
             {
                 if (null == engine)
                 {
                     engine = new MissionEngine();
-                    GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Engine, engine);
+                    GlobalServicesLocator.Instance.AddService<IMissionEngine>(engine);
                 }
             }
 
-            try
-            {
-                // TODO this is hack until I decide what to do about duplicate services
-                GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, new DemoMissionLoader());
-                GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
-            }
-            catch (Exception)
-            {
-            }
+            GlobalServicesLocator.Instance.AddReplaceService<IMissionLoader>(new DemoMissionLoader());
+            GlobalServicesLocator.Instance.AddReplaceService<IMissionPlayerData>(new DemoPlayerData());
 
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
@@ -95,7 +88,7 @@ namespace TatmanGames.Missions.Demo
         {
             engineState.text = "Engine is started";
             IMissionPlayerData playerData =
-                GlobalServicesLocator.Instance.GetServiceByName<IMissionPlayerData>(MissionServiceLocator.PlayerData);
+                GlobalServicesLocator.Instance.GetService<IMissionPlayerData>();
             
             playerData.Initialize();
             

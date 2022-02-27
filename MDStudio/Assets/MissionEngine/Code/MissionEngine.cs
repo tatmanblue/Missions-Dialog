@@ -20,7 +20,7 @@ namespace TatmanGames.Missions
         
         public void Initialize()
         {
-            IMissionLoader loader = GlobalServicesLocator.Instance.GetServiceByName<IMissionLoader>(MissionServiceLocator.Loader);
+            IMissionLoader loader = GlobalServicesLocator.Instance.GetService<IMissionLoader>();
 
             
             AllMissions = loader?.ReadAllMissions();
@@ -30,9 +30,9 @@ namespace TatmanGames.Missions
 
         public void StartMissions()
         {
-            IMissionLoader loader = GlobalServicesLocator.Instance.GetServiceByName<IMissionLoader>(MissionServiceLocator.Loader);
+            IMissionLoader loader = GlobalServicesLocator.Instance.GetService<IMissionLoader>();
             IMissionPlayerData playerData =
-                GlobalServicesLocator.Instance.GetServiceByName<IMissionPlayerData>(MissionServiceLocator.PlayerData); 
+                GlobalServicesLocator.Instance.GetService<IMissionPlayerData>(); 
             if (null == playerData)
                 throw new MissionEngineError("there is no PlayerData to initialize mission engine");
             

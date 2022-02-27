@@ -27,8 +27,8 @@ namespace TatmanGames.Character.NPC
         {
             InitializeDefaults();
 
-            engine = GlobalServicesLocator.Instance.GetServiceByName<INpcEngine>("NpcEngine");
-            INpcSpawnController controller = GlobalServicesLocator.Instance.GetServiceByName<INpcSpawnController>("NpcSpawnController");
+            engine = GlobalServicesLocator.Instance.GetService<INpcEngine>();
+            INpcSpawnController controller = GlobalServicesLocator.Instance.GetService<INpcSpawnController>();
             
             GameObject[] respawns = controller.GetAllNpcSpawnPoints();
             if (null == respawns)
@@ -64,20 +64,20 @@ namespace TatmanGames.Character.NPC
             try
             {
                 // because we can't ask if the service exists
-                GlobalServicesLocator.Instance.GetServiceByName<INpcEngine>("NpcEngine");
+                GlobalServicesLocator.Instance.GetService<INpcEngine>();
             }
             catch (ServiceLocatorException)
             {
-                GlobalServicesLocator.Instance.AddService<INpcEngine>("NpcEngine", new NPCEngine());
+                GlobalServicesLocator.Instance.AddService<INpcEngine>(new NPCEngine());
             }
 
             try
             {
-                GlobalServicesLocator.Instance.GetServiceByName<INpcSpawnController>("NpcSpawnController");
+                GlobalServicesLocator.Instance.GetService<INpcSpawnController>();
             }
             catch (ServiceLocatorException)
             {
-                GlobalServicesLocator.Instance.AddService<INpcSpawnController>("NpcSpawnController", this);
+                GlobalServicesLocator.Instance.AddService<INpcSpawnController>(this);
             }
         }
 

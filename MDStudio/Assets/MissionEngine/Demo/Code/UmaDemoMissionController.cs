@@ -28,27 +28,27 @@ namespace TatmanGames.Missions.Demo
             popupHandler = new PopupHandler(dialogEvents);
             popupHandler.Canvas = canvas;
             
-            services.AddService(DialogServices.PopupHandler, popupHandler);
-            services.AddService(DialogServices.PopupEventsManager, dialogEvents);
-            services.AddService(DialogServices.DialogEvents, dialogEvents);
+            services.AddService<IPopupHandler>(popupHandler);
+            services.AddService<IPopupEventsManager>(dialogEvents);
+            services.AddService<IDialogEvents>(dialogEvents);
             
             dialogEvents.OnButtonPressed += DialogEventsOnButtonPressed;
             
             try
             {
-                engine = GlobalServicesLocator.Instance.GetServiceByName<IMissionEngine>(MissionServiceLocator.Engine);
+                engine = GlobalServicesLocator.Instance.GetService<IMissionEngine>();
             }
             catch (ServiceLocatorException)
             {
                 if (null == engine)
                 {
                     engine = new MissionEngine();
-                    GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Engine, engine);
+                    GlobalServicesLocator.Instance.AddService<IMissionEngine>(engine);
                 }
             }
 
-            GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, this);
-            GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
+            GlobalServicesLocator.Instance.AddReplaceService<IMissionLoader>(this);
+            GlobalServicesLocator.Instance.AddReplaceService<IMissionPlayerData>(new DemoPlayerData());
 
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
@@ -76,8 +76,7 @@ namespace TatmanGames.Missions.Demo
             if (true == dialogName.Contains("MissionDialog") && true == buttonId.Contains("proceed"))
             {
                 SetMissionMessage($"mission screen proceed detected. {dialogName} {buttonId}");
-                GlobalServicesLocator.Instance.GetServiceByName<IPopupHandler>(DialogServices.PopupHandler)
-                    ?.CloseDialog();
+                GlobalServicesLocator.Instance.GetService<IPopupHandler>()?.CloseDialog();
             }
 
             return false;
@@ -117,7 +116,7 @@ namespace TatmanGames.Missions.Demo
         {
             SetMissionMessage("mission engine initialized");
             IMissionPlayerData playerData =
-                GlobalServicesLocator.Instance.GetServiceByName<IMissionPlayerData>(MissionServiceLocator.PlayerData);
+                GlobalServicesLocator.Instance.GetService<IMissionPlayerData>();
             
             playerData.Initialize();
         }
