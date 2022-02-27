@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TatmanGames.Common;
 using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
@@ -48,7 +49,7 @@ namespace TatmanGames.Missions.Demo
 
             GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, this);
             GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
-            
+
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
             engine.OnMissionStarted += OnMissionStarted;
@@ -57,6 +58,16 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionCompleted += OnMissionCompleted;
             engine.Initialize();
             
+        }
+
+        private void OnDestroy()
+        {
+            engine.OnEngineInitialized -= OnMissionEngineInitialized;
+            engine.OnMissionEngineStopped -= OnMissionEngineStopped;
+            engine.OnMissionStarted -= OnMissionStarted;
+            engine.OnMissionStepStarted -= OnMissionStepStarted;
+            engine.OnMissionStepCompleted -= OnMissionStepCompleted;
+            engine.OnMissionCompleted -= OnMissionCompleted;
         }
 
         #region dialog events

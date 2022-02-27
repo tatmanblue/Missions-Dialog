@@ -38,8 +38,15 @@ namespace TatmanGames.Missions.Demo
                 }
             }
 
-            GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, new DemoMissionLoader());
-            GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
+            try
+            {
+                // TODO this is hack until I decide what to do about duplicate services
+                GlobalServicesLocator.Instance.AddService(MissionServiceLocator.Loader, new DemoMissionLoader());
+                GlobalServicesLocator.Instance.AddService(MissionServiceLocator.PlayerData, new DemoPlayerData());
+            }
+            catch (Exception)
+            {
+            }
 
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
