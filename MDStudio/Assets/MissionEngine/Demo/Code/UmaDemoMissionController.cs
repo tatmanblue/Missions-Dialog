@@ -62,7 +62,13 @@ namespace TatmanGames.Missions.Demo
         #region dialog events
         private bool DialogEventsOnButtonPressed(string dialogName, string buttonId)
         {
-            SetMissionMessage($"mission screen proceed detected.");
+            if (true == dialogName.Contains("MissionDialog") && true == buttonId.Contains("proceed"))
+            {
+                SetMissionMessage($"mission screen proceed detected. {dialogName} {buttonId}");
+                GlobalServicesLocator.Instance.GetServiceByName<IPopupHandler>(DialogServices.PopupHandler)
+                    ?.CloseDialog();
+            }
+
             return false;
         }
         #endregion
