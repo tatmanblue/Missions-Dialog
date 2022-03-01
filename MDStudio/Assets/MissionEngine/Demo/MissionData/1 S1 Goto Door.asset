@@ -16,5 +16,5 @@ MonoBehaviour:
   parent: {fileID: 0}
   mission: {fileID: 11400000, guid: 6208c440fd92d9d4f867da8fdea7ba99, type: 2}
   uuid: 2220b3b4-f784-4308-8f8c-5871032a4cfe
-  missionStepName: Go to Door
-  description: Walk to the door
+  missionStepName: Go to the warehouse
+  description: Walk to the warehouse area

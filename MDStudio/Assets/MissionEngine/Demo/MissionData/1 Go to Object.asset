@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 1
   parent: {fileID: 0}
   uuid: 4edc6f2f-41f3-4bdb-a134-70ed363b442d
-  missionName: Mission 1
-  description: The walking mission
+  missionName: The Basics
+  description: This tutorial will show you how to interact with the environment by
+    walking around and talking with NPCs
   steps:
   - {fileID: 11400000, guid: 2344cb8945eec7745942dbc961ff501d, type: 2}
