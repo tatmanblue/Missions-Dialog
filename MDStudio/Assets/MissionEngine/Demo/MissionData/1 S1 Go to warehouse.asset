@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6faebaa35d94f6c96b64a7b72c47fd7, type: 3}
-  m_Name: 1 S1 Goto Door
+  m_Name: 1 S1 Go to warehouse
   m_EditorClassIdentifier: 
   id: 1
   parent: {fileID: 0}
   mission: {fileID: 11400000, guid: 6208c440fd92d9d4f867da8fdea7ba99, type: 2}
   uuid: 2220b3b4-f784-4308-8f8c-5871032a4cfe
   missionStepName: Go to the warehouse
-  description: Walk to the warehouse area
+  description: Walk to the warehouse area.  Remember W moves you forward.  A,S,D
+    will change your direction.
