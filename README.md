@@ -11,7 +11,7 @@ Unity Game.
 
 ## Assets
 You must have the 3rd party assets installed prior to opening any of scenes.   In house assets are built by bulding and exporting the asset and are checked into the repo.
-3rd party assets must be purchased from the vendor (links provided).
+3rd party assets must be purchased from the vendor (links provided).  Most of the 3rd party assets are required to run the demo but not required to use the library.
 
 ### In house Assets  
 [Character Controller](https://github.com/tatmanblue/Unity-Characters/tree/main/CharacterStudio/Assets/Character)  
@@ -21,6 +21,7 @@ You must have the 3rd party assets installed prior to opening any of scenes.   I
 [Cinemachine](https://docs.unity3d.com/Packages/com.unity.cinemachine@2.6/manual/index.html)  
 [Clean & Minimalist UI](https://assetstore.unity.com/packages/2d/gui/clean-minimalist-gui-pack-75123)  
 [Dialog System](https://assetstore.unity.com/packages/tools/ai/dialogue-system-for-unity-11672)  
+[Free Shipping Containers](https://assetstore.unity.com/packages/3d/environments/industrial/free-shipping-containers-18315)  
 [Text Mesh Pro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html)  
 [UI Builder](https://assetstore.unity.com/packages/2d/gui/ui-builder-29757)  
 [Uma2](https://assetstore.unity.com/packages/3d/characters/uma-2-unity-multipurpose-avatar-35611)  
