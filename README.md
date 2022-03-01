@@ -18,10 +18,13 @@ You must have the 3rd party assets installed prior to opening any of scenes.   I
 [ScreenUI](https://github.com/tatmanblue/UI-Input/tree/main/Assets/ScreenUI)  
 
 ### 3rd Party Assets
+Note: these are required to get the demos working.  
+[Bodyguards](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/bodyguards-31711)  
 [Cinemachine](https://docs.unity3d.com/Packages/com.unity.cinemachine@2.6/manual/index.html)  
 [Clean & Minimalist UI](https://assetstore.unity.com/packages/2d/gui/clean-minimalist-gui-pack-75123)  
 [Dialog System](https://assetstore.unity.com/packages/tools/ai/dialogue-system-for-unity-11672)  
 [Free Shipping Containers](https://assetstore.unity.com/packages/3d/environments/industrial/free-shipping-containers-18315)  
+[Free Textures](https://assetstore.unity.com/packages/2d/textures-materials/nature/6-free-textures-90953)  
 [Text Mesh Pro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html)  
 [UI Builder](https://assetstore.unity.com/packages/2d/gui/ui-builder-29757)  
 [Uma2](https://assetstore.unity.com/packages/3d/characters/uma-2-unity-multipurpose-avatar-35611)  
