@@ -14,6 +14,7 @@ namespace TatmanGames.Missions
         public event MissionStarted OnMissionStarted;
         public event MissionStepStarted OnMissionStepStarted;
         public event MissionStepCompleted OnMissionStepCompleted;
+        public event AllMissionStepsCompleted OnAllMissionStepsCompleted;
         public event MissionCompleted OnMissionCompleted;
         public event MissionEngineInitialized OnEngineInitialized;
         public event MissionEngineStopped OnMissionEngineStopped;
@@ -88,9 +89,7 @@ namespace TatmanGames.Missions
             if (activeStepIndex >= ActiveMission.Steps.Count)
             {
                 ActiveStep = null;
-                IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();
-                aggregator.SetCompleteState(ActiveMission, true);
-                CompleteActiveMission();
+                FireAllMissionStepsCompleted();
                 return;
             }
 
@@ -142,7 +141,15 @@ namespace TatmanGames.Missions
 
             stepCompleted(ActiveStep);
         }
-        
+
+        private void FireAllMissionStepsCompleted()
+        {
+            AllMissionStepsCompleted all = OnAllMissionStepsCompleted;
+            if (null == all)
+                return;
+
+            all(ActiveMission);
+        }
         private void FireEngineInitialized()
         {
             MissionEngineInitialized initialized = OnEngineInitialized;

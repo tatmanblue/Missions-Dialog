@@ -56,6 +56,7 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionStarted += OnMissionStarted;
             engine.OnMissionStepStarted += OnMissionStepStarted;
             engine.OnMissionStepCompleted += OnMissionStepCompleted;
+            engine.OnAllMissionStepsCompleted += OnAllMissionStepsCompleted;
             engine.OnMissionCompleted += OnMissionCompleted;
             engine.Initialize();
             
@@ -63,11 +64,13 @@ namespace TatmanGames.Missions.Demo
 
         private void OnDestroy()
         {
+            // todo: could order of unsubscription cause a problem?
             engine.OnEngineInitialized -= OnMissionEngineInitialized;
             engine.OnMissionEngineStopped -= OnMissionEngineStopped;
             engine.OnMissionStarted -= OnMissionStarted;
             engine.OnMissionStepStarted -= OnMissionStepStarted;
             engine.OnMissionStepCompleted -= OnMissionStepCompleted;
+            engine.OnAllMissionStepsCompleted -= OnAllMissionStepsCompleted;
             engine.OnMissionCompleted -= OnMissionCompleted;
         }
 
@@ -93,6 +96,14 @@ namespace TatmanGames.Missions.Demo
         private void OnMissionStepCompleted(IMissionStep s)
         {
             SetMissionMessage($"mission {s.Name}({s.Id}/{s.MissionId}) completed.");
+        }
+
+        private void OnAllMissionStepsCompleted(IMission m)
+        {
+            SetMissionMessage($"All steps for mission {m.Name} completed.");
+            IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();
+            aggregator?.SetCompleteState(engine?.ActiveMission, true);
+            engine?.CompleteActiveMission();
         }
 
         private void OnMissionStepStarted(IMissionStep s)

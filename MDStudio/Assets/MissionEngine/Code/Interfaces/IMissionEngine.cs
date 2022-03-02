@@ -12,6 +12,7 @@ namespace TatmanGames.Missions.Interfaces
 		event MissionStarted OnMissionStarted;
 		event MissionStepStarted OnMissionStepStarted;
 		event MissionStepCompleted OnMissionStepCompleted;
+		event AllMissionStepsCompleted OnAllMissionStepsCompleted;
 		event MissionCompleted OnMissionCompleted;
 		event MissionEngineInitialized OnEngineInitialized;
 		event MissionEngineStopped OnMissionEngineStopped;

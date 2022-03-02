@@ -13,5 +13,7 @@ namespace TatmanGames.Missions
 
     public delegate void MissionStepCompleted(IMissionStep s);
 
+    public delegate void AllMissionStepsCompleted(IMission m);
+
     public delegate void MissionEngineStopped();
 }
