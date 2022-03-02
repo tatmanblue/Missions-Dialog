@@ -39,6 +39,8 @@ namespace TatmanGames.Missions.Interfaces
         /// should be complete before the mission is complete.
         ///
         /// "Complete" is determined by other parts of the game
+        ///
+        /// Todo is this needed now that we have extension methods
         /// </summary>
         /// <returns></returns>
         bool IsCompleted();

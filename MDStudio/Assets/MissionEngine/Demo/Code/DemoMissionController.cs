@@ -38,6 +38,7 @@ namespace TatmanGames.Missions.Demo
                 }
             }
 
+            GlobalServicesLocator.Instance.AddReplaceService<IMissionStateAggregator>(new MissionStateAggregator());
             GlobalServicesLocator.Instance.AddReplaceService<IMissionLoader>(new DemoMissionLoader());
             GlobalServicesLocator.Instance.AddReplaceService<IMissionPlayerData>(new DemoPlayerData());
 
@@ -48,6 +49,16 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionStepCompleted += OnMissionStepCompleted;
             engine.OnMissionCompleted += OnMissionCompleted;
             engine.Initialize();
+        }
+        
+        private void OnDestroy()
+        {
+            engine.OnEngineInitialized -= OnMissionEngineInitialized;
+            engine.OnMissionEngineStopped -= OnMissionEngineStopped;
+            engine.OnMissionStarted -= OnMissionStarted;
+            engine.OnMissionStepStarted -= OnMissionStepStarted;
+            engine.OnMissionStepCompleted -= OnMissionStepCompleted;
+            engine.OnMissionCompleted -= OnMissionCompleted;
         }
 
         private void OnMissionCompleted(IMission m)

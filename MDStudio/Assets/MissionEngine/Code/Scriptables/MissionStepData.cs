@@ -1,4 +1,5 @@
 ﻿using System;
+using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using UnityEngine;
 
@@ -25,7 +26,8 @@ namespace TatmanGames.Missions.Scriptables
 
         public bool IsCompleted()
         {
-            throw new System.NotImplementedException();
+            IMissionStep step = this as IMissionStep;
+            return step.CheckIsComplete();
         }
         
         public int CompareTo(object obj)

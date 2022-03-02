@@ -47,6 +47,7 @@ namespace TatmanGames.Missions.Demo
                 }
             }
 
+            GlobalServicesLocator.Instance.AddReplaceService<IMissionStateAggregator>(new MissionStateAggregator());
             GlobalServicesLocator.Instance.AddReplaceService<IMissionLoader>(this);
             GlobalServicesLocator.Instance.AddReplaceService<IMissionPlayerData>(new DemoPlayerData());
 

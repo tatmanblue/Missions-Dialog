@@ -15,6 +15,11 @@ namespace TatmanGames.Missions.Interfaces
         string Name { get; }
         string Description { get; }
 
+        /// <summary>
+        /// allows references to query state of the mission step
+        /// Todo is this needed now that we have extension methods
+        /// </summary>
+        /// <returns></returns>
         bool IsCompleted();
     }
 }

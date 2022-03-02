@@ -43,7 +43,7 @@ namespace TatmanGames.Missions
             ActiveMission = AllMissions.Find(m => m.Id == activeMission.Id);
             if (null != ActiveMission)
             {
-                FireMissionLoaded();
+                FireMissionStarted();
                 ProcessActiveMission(playerData.ActiveMissionStepId);
             }
         }
@@ -70,7 +70,7 @@ namespace TatmanGames.Missions
             }
 
             ActiveMission = AllMissions[activeMissionIndex];
-            FireMissionLoaded();
+            FireMissionStarted();
             ProcessActiveMission();
         }
 
@@ -93,7 +93,7 @@ namespace TatmanGames.Missions
             }
 
             ActiveStep = ActiveMission.Steps[activeStepIndex];
-            FireMissionStepLoaded();
+            FireMissionStepStarted();
         }
         
         private void ProcessActiveMission(int stepId = 1)
@@ -106,10 +106,10 @@ namespace TatmanGames.Missions
 
             if (null == ActiveStep) return;
 
-            FireMissionStepLoaded();
+            FireMissionStepStarted();
             
         }
-        private void FireMissionLoaded()
+        private void FireMissionStarted()
         {
             MissionStarted started = OnMissionStarted;
             if (null == started) return;
@@ -125,7 +125,7 @@ namespace TatmanGames.Missions
             completed(ActiveMission);
         }
 
-        private void FireMissionStepLoaded()
+        private void FireMissionStepStarted()
         {
             MissionStepStarted stepStarted = OnMissionStepStarted;
             if (null == stepStarted) return;

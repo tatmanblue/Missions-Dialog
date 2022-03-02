@@ -24,10 +24,10 @@ namespace TatmanGames.Missions.Demo
             Debug.Log($"collision.contacts[0].thisCollider.name {collision.contacts[0].thisCollider.name}");
 
             IMissionEngine engine = GlobalServicesLocator.Instance.GetService<IMissionEngine>();
-            if (null != engine.ActiveStep)
-                engine.CompleteActiveMissionStep();
-            else
-                engine.CompleteActiveMission();
+            IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();
+            
+            aggregator.SetCompleteState(mission as IMission, step as IMissionStep, true);
+            engine.CompleteActiveMissionStep();
             
             Destroy(this.gameObject);
         }
