@@ -88,6 +88,8 @@ namespace TatmanGames.Missions
             if (activeStepIndex >= ActiveMission.Steps.Count)
             {
                 ActiveStep = null;
+                IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();
+                aggregator.SetCompleteState(ActiveMission, true);
                 CompleteActiveMission();
                 return;
             }

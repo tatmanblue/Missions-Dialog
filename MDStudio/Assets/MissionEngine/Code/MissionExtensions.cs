@@ -5,11 +5,32 @@ namespace TatmanGames.Missions
 {
     public static class MissionExtensions
     {
+        /// <summary>
+        /// returns the state of the mission as saved in the IMissionStateAggregator
+        /// be aware of the purpose of the IMissionStateAggregator and incorrectly calling this might
+        /// yield false
+        ///
+        /// example:
+        /// current mission is #3 in the list, calling this on mission #2 may return false
+        /// even though mission 3 cannot be active before mission 2 is complete.
+        /// </summary>
+        /// <param name="mission"></param>
+        /// <returns></returns>
         public static bool CheckIsComplete(this IMission mission)
         {
-            return false;
+            IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();
+
+            // is there any reason we should check that ActiveMission = mission
+            return aggregator.IsComplete(mission, null);
         }
 
+        /// <summary>
+        /// returns the state of the mission as saved in the IMissionStateAggregator
+        /// be aware of the purpose of the IMissionStateAggregator and incorrectly calling this might
+        /// yield false
+        /// </summary>
+        /// <param name="step"></param>
+        /// <returns></returns>
         public static bool CheckIsComplete(this IMissionStep step)
         {
             IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();

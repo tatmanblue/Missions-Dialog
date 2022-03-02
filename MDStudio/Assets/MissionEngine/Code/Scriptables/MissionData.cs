@@ -29,8 +29,7 @@ namespace TatmanGames.Missions.Scriptables
         
         public bool IsCompleted()
         {
-            IMission m = this as IMission;
-            return m.IsCompleted();
+            return this.CheckIsComplete();
         }
         
         public int CompareTo(object obj)
