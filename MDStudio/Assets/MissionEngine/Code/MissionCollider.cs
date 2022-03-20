@@ -4,7 +4,7 @@ using TatmanGames.Missions.Interfaces;
 using TatmanGames.Missions.Scriptables;
 using UnityEngine;
 
-namespace TatmanGames.Missions.Demo
+namespace TatmanGames.Missions
 {
     public class MissionCollider : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace TatmanGames.Missions.Demo
         {
             colliderName = this.gameObject.name;
         }
-
+        
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log($"collision.body.name {collision.body.name}");
