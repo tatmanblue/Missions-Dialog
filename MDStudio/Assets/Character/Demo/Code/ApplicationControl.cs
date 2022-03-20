@@ -12,7 +12,7 @@ namespace TatmanGames.Character.Character.Demo
         // Update is called once per frame
         private void Update()
         {
-            if (true == Input.GetKey(KeyCode.Escape))
+            if (true == Input.GetKey(KeyCode.Backspace))
             {
                 if (SceneManager.GetActiveScene().name.Contains("Menu"))
                     Application.Quit(0);
@@ -50,6 +50,9 @@ namespace TatmanGames.Character.Character.Demo
                     break;
                 case 3:
                     SceneManager.LoadScene("UnityController");
+                    break;
+                case 4:
+                    SceneManager.LoadScene("OpsiveUma");
                     break;
                 default:
                     break;

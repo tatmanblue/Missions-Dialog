@@ -592,7 +592,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: TMP_PRESENT
+    1: TMP_PRESENT;FIRST_PERSON_CONTROLLER;THIRD_PERSON_CONTROLLER;ULTIMATE_CHARACTER_CONTROLLER_SHOOTER;FIRST_PERSON_SHOOTER;ULTIMATE_CHARACTER_CONTROLLER_MELEE;FIRST_PERSON_MELEE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -638,6 +638,7 @@ PlayerSettings:
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 
+  vcxProjDefaultLanguage: 
   XboxOneProductId: 
   XboxOneUpdateKey: 
   XboxOneSandboxId: 

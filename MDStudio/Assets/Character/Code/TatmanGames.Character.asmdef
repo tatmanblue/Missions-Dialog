@@ -1,7 +1,9 @@
 {
     "name": "TatmanGames.Character",
     "rootNamespace": "TatmanGames.Character",
-    "references": ["TatmanGames.Common"],
+    "references": [
+        "Opsive.UltimateCharacterController",
+        "TatmanGames.Common"],
     "includePlatforms": [
         "Editor",
         "LinuxStandalone64",
