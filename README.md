@@ -26,6 +26,7 @@ Note: these are required to get the demos working.
 [Dialog System](https://assetstore.unity.com/packages/tools/ai/dialogue-system-for-unity-11672)  
 [Free Shipping Containers](https://assetstore.unity.com/packages/3d/environments/industrial/free-shipping-containers-18315)  
 [Free Textures](https://assetstore.unity.com/packages/2d/textures-materials/nature/6-free-textures-90953)  
+[Opsive](https://assetstore.unity.com/packages/tools/game-toolkits/ultimate-character-controller-99962)  
 [Text Mesh Pro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html)  
 [UI Builder](https://assetstore.unity.com/packages/2d/gui/ui-builder-29757)  
 [Uma2](https://assetstore.unity.com/packages/3d/characters/uma-2-unity-multipurpose-avatar-35611)  
