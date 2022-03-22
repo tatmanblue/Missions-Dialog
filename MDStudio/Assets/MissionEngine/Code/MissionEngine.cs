@@ -22,7 +22,6 @@ namespace TatmanGames.Missions
         public void Initialize()
         {
             IMissionLoader loader = GlobalServicesLocator.Instance.GetService<IMissionLoader>();
-
             
             AllMissions = loader?.ReadAllMissions();
             AllMissions?.Sort();

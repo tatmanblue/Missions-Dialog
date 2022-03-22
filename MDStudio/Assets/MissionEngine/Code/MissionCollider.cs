@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace TatmanGames.Missions
 {
+    /// <summary>
+    /// When this collider triggers, it means the player has entered an area that is part of a mission.
+    ///
+    /// The assumption is this trigger ends a mission step (or a mission).
+    /// </summary>
     public class MissionCollider : MonoBehaviour
     {
         [SerializeField] private MissionData mission;
@@ -17,15 +22,23 @@ namespace TatmanGames.Missions
         {
             colliderName = this.gameObject.name;
         }
-        
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            HandleTrigger();
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log($"collision.body.name {collision.body.name}");
-            Debug.Log($"collision.contacts[0].thisCollider.name {collision.contacts[0].thisCollider.name}");
+            HandleTrigger();
+        }
 
+        private void HandleTrigger()
+        {
             IMissionEngine engine = GlobalServicesLocator.Instance.GetService<IMissionEngine>();
             IMissionStateAggregator aggregator = GlobalServicesLocator.Instance.GetService<IMissionStateAggregator>();
             
+            Debug.Log($"{mission.Name} and {step.Name} triggered");
             aggregator.SetCompleteState(mission as IMission, step as IMissionStep, true);
             engine.CompleteActiveMissionStep();
             

@@ -5,9 +5,11 @@ using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using TatmanGames.Missions.Scriptables;
 using TatmanGames.ScreenUI.Interfaces;
+using TatmanGames.ScreenUI.Scene;
 using TatmanGames.ScreenUI.UI;
 using TMPro;
 using UnityEngine;
+using ILogger = TatmanGames.ScreenUI.Interfaces.ILogger;
 
 namespace TatmanGames.Missions.Demo
 {
@@ -31,6 +33,7 @@ namespace TatmanGames.Missions.Demo
             services.AddService<IPopupHandler>(popupHandler);
             services.AddService<IPopupEventsManager>(dialogEvents);
             services.AddService<IDialogEvents>(dialogEvents);
+            services.AddReplaceService<ILogger>(new DebugLogging());
             
             dialogEvents.OnButtonPressed += DialogEventsOnButtonPressed;
             
@@ -140,6 +143,8 @@ namespace TatmanGames.Missions.Demo
             if (null == missionState)
                 return;
 
+            ILogger logger = GlobalServicesLocator.Instance.GetService<ILogger>();
+            logger.Log(msg);
             missionState.text = msg;
         }
 
