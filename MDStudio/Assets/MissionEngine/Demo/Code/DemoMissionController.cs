@@ -2,8 +2,10 @@
 using TatmanGames.Common;
 using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
+using TatmanGames.ScreenUI.Scene;
 using TMPro;
 using UnityEngine;
+using ILogger = TatmanGames.ScreenUI.Interfaces.ILogger;
 
 namespace TatmanGames.Missions.Demo
 {
@@ -41,6 +43,7 @@ namespace TatmanGames.Missions.Demo
             GlobalServicesLocator.Instance.AddReplaceService<IMissionStateAggregator>(new MissionStateAggregator());
             GlobalServicesLocator.Instance.AddReplaceService<IMissionLoader>(new DemoMissionLoader());
             GlobalServicesLocator.Instance.AddReplaceService<IMissionPlayerData>(new DemoPlayerData());
+            GlobalServicesLocator.Instance.AddReplaceService<ILogger>(new DebugLogging());
 
             engine.OnEngineInitialized += OnMissionEngineInitialized;
             engine.OnMissionEngineStopped += OnMissionEngineStopped;
@@ -48,6 +51,7 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionStepStarted += OnMissionStepStarted;
             engine.OnMissionStepCompleted += OnMissionStepCompleted;
             engine.OnMissionCompleted += OnMissionCompleted;
+            engine.OnMissionPostStarted += OnMissionPostStarted;
             engine.Initialize();
         }
         
@@ -59,6 +63,13 @@ namespace TatmanGames.Missions.Demo
             engine.OnMissionStepStarted -= OnMissionStepStarted;
             engine.OnMissionStepCompleted -= OnMissionStepCompleted;
             engine.OnMissionCompleted -= OnMissionCompleted;
+        }
+
+        private void OnMissionPostStarted(IMission m, IMissionStep s)
+        {
+            // not sure if I wanted this information to stomp other mission start events
+            ILogger logger = GlobalServicesLocator.Instance.GetService<ILogger>();
+            logger?.Log("MissionPostStartedEvent received");
         }
 
         private void OnMissionCompleted(IMission m)

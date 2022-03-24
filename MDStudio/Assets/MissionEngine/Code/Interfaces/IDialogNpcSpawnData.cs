@@ -1,7 +1,7 @@
 ﻿namespace TatmanGames.Missions.Interfaces
 {
     /// <summary>
-    /// Data required for npc spawn engine to wire up converations (dialog)
+    /// Data required for npc spawn engine to wire up conversations (dialog)
     /// </summary>
     public interface IDialogNpcSpawnData
     {

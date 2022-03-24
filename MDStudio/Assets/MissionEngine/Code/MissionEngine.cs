@@ -13,6 +13,7 @@ namespace TatmanGames.Missions
         
         public event MissionStarted OnMissionStarted;
         public event MissionStepStarted OnMissionStepStarted;
+        public event MissionPostStarted OnMissionPostStarted;
         public event MissionStepCompleted OnMissionStepCompleted;
         public event AllMissionStepsCompleted OnAllMissionStepsCompleted;
         public event MissionCompleted OnMissionCompleted;
@@ -109,20 +110,13 @@ namespace TatmanGames.Missions
             FireMissionStepStarted();
             
         }
+
         private void FireMissionStarted()
         {
             MissionStarted started = OnMissionStarted;
             if (null == started) return;
 
             started(ActiveMission);
-        }
-
-        private void FireMissionCompleted()
-        {
-            MissionCompleted completed = OnMissionCompleted;
-            if (null == completed) return;
-
-            completed(ActiveMission);
         }
 
         private void FireMissionStepStarted()
@@ -133,6 +127,21 @@ namespace TatmanGames.Missions
             stepStarted(ActiveStep);
         }
 
+        private void FireMissionPostStarted(IMission m, IMissionStep s)
+        {
+            MissionPostStarted postStart = OnMissionPostStarted;
+            if (null == postStart) return;
+            postStart(m, s);
+        }
+
+        private void FireMissionCompleted()
+        {
+            MissionCompleted completed = OnMissionCompleted;
+            if (null == completed) return;
+
+            completed(ActiveMission);
+        }
+        
         private void FireMissionStepCompleted()
         {
             MissionStepCompleted stepCompleted = OnMissionStepCompleted;
@@ -149,6 +158,7 @@ namespace TatmanGames.Missions
 
             all(ActiveMission);
         }
+
         private void FireEngineInitialized()
         {
             MissionEngineInitialized initialized = OnEngineInitialized;

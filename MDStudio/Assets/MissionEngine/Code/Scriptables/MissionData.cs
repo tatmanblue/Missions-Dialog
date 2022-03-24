@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TatmanGames.Missions.Scriptables
 {
-    [CreateAssetMenu(fileName = "Mission", menuName = "Tatman Games/Characters/Mission")]
+    [CreateAssetMenu(fileName = "Mission", menuName = "Tatman Games/Missions/Mission")]
     public class MissionData : ScriptableObject, IMission
     {
         #region IMission properties

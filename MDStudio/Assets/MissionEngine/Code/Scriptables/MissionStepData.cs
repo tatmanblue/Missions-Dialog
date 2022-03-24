@@ -8,7 +8,7 @@ namespace TatmanGames.Missions.Scriptables
     /// <summary>
     /// TODO: there is a circular reference here that I do not like
     /// </summary>
-    [CreateAssetMenu(fileName = "MissionStep", menuName = "Tatman Games/Characters/Mission Step")]
+    [CreateAssetMenu(fileName = "MissionStep", menuName = "Tatman Games/Missions/Mission Step")]
     public class MissionStepData : ScriptableObject, IMissionStep
     {
         #region IMission properties
