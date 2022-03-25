@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using TatmanGames.Character.Interfaces;
 using TatmanGames.Common;
 using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
+using TatmanGames.Missions.NPC;
 using TatmanGames.Missions.Scriptables;
 using TatmanGames.ScreenUI.Interfaces;
 using TatmanGames.ScreenUI.Scene;
@@ -13,6 +15,11 @@ using ILogger = TatmanGames.ScreenUI.Interfaces.ILogger;
 
 namespace TatmanGames.Missions.Demo
 {
+    /// <summary>
+    /// demos a controller initializing and interacting with the mission engine
+    ///
+    /// it seems plausable in production the MissionLoader would be a separate type
+    /// </summary>
     public class UmaDemoMissionController : MonoBehaviour, IMissionLoader
     {
         [SerializeField] private List<MissionData> missions = new List<MissionData>();
@@ -36,6 +43,8 @@ namespace TatmanGames.Missions.Demo
             services.AddReplaceService<ILogger>(new DebugLogging());
             
             dialogEvents.OnButtonPressed += DialogEventsOnButtonPressed;
+            
+            GlobalServicesLocator.Instance.AddReplaceService<INpcSpawnController>(new DialogNpcSpawnController());
             
             try
             {

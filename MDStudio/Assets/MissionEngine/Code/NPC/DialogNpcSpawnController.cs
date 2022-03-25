@@ -1,5 +1,6 @@
 ﻿using TatmanGames.Character;
 using TatmanGames.Character.Interfaces;
+using TatmanGames.Common.ServiceLocator;
 using TatmanGames.Missions.Interfaces;
 using UnityEngine;
 
@@ -18,7 +19,8 @@ namespace TatmanGames.Missions.NPC
 
         public GameObject[] GetAllNpcSpawnPoints()
         {
-            return GameObject.FindGameObjectsWithTag(NpcServiceLocator.Instance.Engine?.SpawnTag);
+            INpcEngine engine = GlobalServicesLocator.Instance.GetService<INpcEngine>();
+            return GameObject.FindGameObjectsWithTag(engine?.SpawnTag);
         }
     }
 }
