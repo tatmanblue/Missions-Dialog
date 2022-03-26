@@ -6,12 +6,15 @@ using UnityEngine;
 
 namespace TatmanGames.Character.Editor
 {
-    public class NPCSpawnerEditor : EditorWindow
+    /// <summary>
+    /// WIP: goal is to be able to graphically setup spawning data and spawning points
+    /// </summary>
+    public class SpawnerEditor : EditorWindow
     {
-        [MenuItem ("Tatman Games/Characters/Spawn Editor")]
+        [MenuItem ("Tools/Tatman Games/Spawn Editor")]
         public static void ShowWindow()
         {
-            EditorWindow.GetWindow(typeof(NPCSpawnerEditor));
+            EditorWindow.GetWindow(typeof(SpawnerEditor));
         }
         
         private string savePath = String.Empty;

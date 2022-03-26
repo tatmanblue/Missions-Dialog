@@ -5,6 +5,7 @@
     /// </summary>
     public interface IDialogNpcSpawnData
     {
-        bool AutomaticSpawning { get; }
+        int MissionId { get; }
+        int MissionStepId { get; }
     }
 }

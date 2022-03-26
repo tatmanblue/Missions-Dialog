@@ -44,7 +44,7 @@ namespace TatmanGames.Missions.Demo
             
             dialogEvents.OnButtonPressed += DialogEventsOnButtonPressed;
             
-            GlobalServicesLocator.Instance.AddReplaceService<INpcSpawnController>(new DialogNpcSpawnController());
+            GlobalServicesLocator.Instance.AddReplaceService<ISpawnController>(new DialogNpcSpawnController());
             
             try
             {

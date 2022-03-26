@@ -1,8 +1,8 @@
 {  
-   "description": "provides character code",
-   "displayName": "Tatman Games Character Kit",
+   "description": "provides character and environment handlers",
+   "displayName": "Tatman Games Character and environment Kit",
    "name": "com.tatman-games.character",
-   "version": "0.0.6",
+   "version": "0.1.1",
    "unity": "2020.3",
   "author": {
     "name": "Matt Raffel",

@@ -9,8 +9,8 @@
     /// INpcSpawnData data source for the data configuring
     /// the Npc.  In this library, a ScriptableObject is the INpcSpawnData
     /// </summary>
-    public interface INpcSpawnPoint
+    public interface ISpawnPoint
     {
-        INpcSpawnData Data { get; }
+        ISpawnData Data { get; }
     }
 }

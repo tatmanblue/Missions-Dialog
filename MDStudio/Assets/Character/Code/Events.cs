@@ -4,8 +4,11 @@ using UnityEngine;
 namespace TatmanGames.Character
 {
     /// <summary>
-    /// an npc spawn has been created 
+    /// a gameobject spawn has been created 
     /// </summary>
-    public delegate void NpcInstantiated(INpcSpawnPoint point, GameObject npc);
-    public delegate void NpcAutoSpawningCompleted();
+    public delegate void GameObjectInstantiated(ISpawnPoint point, GameObject npc);
+    /// <summary>
+    /// this event occurs after the startup has completed and auto spawn is complete
+    /// </summary>
+    public delegate void GameObjectAutoSpawningCompleted();
 }

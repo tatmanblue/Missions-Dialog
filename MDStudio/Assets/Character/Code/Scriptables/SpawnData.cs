@@ -9,18 +9,25 @@ namespace TatmanGames.Character.Scriptables
     /// <summary>
     /// a persisted view, so to speak, into a model INPCSpawnData
     /// </summary>
-    [CreateAssetMenu(fileName = "SpawnData", menuName = "Tatman Games/Characters/NPC Spawn")]
-    public class NPCSpawnData : ScriptableObject, INpcSpawnData
+    [CreateAssetMenu(fileName = "SpawnData", menuName = "Tatman Games/Spawn Data")]
+    public class SpawnData : ScriptableObject, ISpawnData
     {
         public int Id
         {
             get { return id; }
         }
 
-        public GameObject NpcAvatar {
+        public bool SpawnOnStart
+        {
             get
             {
-                return npcAvatar;
+                return spawnOnStart;
+            }
+        }
+        public GameObject SpawnableObject {
+            get
+            {
+                return spawnableObject;
             }
         }
 
@@ -31,7 +38,8 @@ namespace TatmanGames.Character.Scriptables
 
 
         [SerializeField] private int id;
-        [SerializeField] private GameObject npcAvatar;
+        [SerializeField] private GameObject spawnableObject;
+        [SerializeField] private bool spawnOnStart = true;
     }
 
 }

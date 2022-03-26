@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace TatmanGames.Missions.NPC
 {
-    public class DialogNpcSpawnPoint : MonoBehaviour, INpcSpawnPoint
+    public class DialogNpcSpawnPoint : MonoBehaviour, ISpawnPoint
     {
-        public INpcSpawnData Data 
+        public ISpawnData Data 
         {
             get
             {

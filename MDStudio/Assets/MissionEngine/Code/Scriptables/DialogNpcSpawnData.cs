@@ -6,12 +6,17 @@ using UnityEngine;
 
 namespace TatmanGames.Missions.Scriptables
 {
-    [CreateAssetMenu(fileName = "DialogSpawnData", menuName = "Tatman Games/Missions/Dialog NPC Spawn Data")]
-    public class DialogNpcSpawnData : ScriptableObject, INpcSpawnData, IDialogNpcSpawnData
+    [CreateAssetMenu(fileName = "DialogSpawnData", menuName = "Tatman Games/Dialog NPC Spawn Data")]
+    public class DialogNpcSpawnData : ScriptableObject, ISpawnData
     {
         public int Id
         {
             get { return id; }
+        }
+
+        public bool SpawnOnStart
+        {
+            get { return automaticSpawning; }
         }
 
         public bool DestroyPointOnSpawn
@@ -19,18 +24,11 @@ namespace TatmanGames.Missions.Scriptables
             get { return true; }
         }
 
-        public GameObject NpcAvatar {
-            get
-            {
-                return npcAvatar;
-            }
-        }
-
-        public bool AutomaticSpawning
+        public GameObject SpawnableObject 
         {
             get
             {
-                return automaticSpawning;
+                return npcAvatar;
             }
         }
         

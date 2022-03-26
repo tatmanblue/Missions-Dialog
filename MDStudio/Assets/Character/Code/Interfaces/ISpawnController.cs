@@ -2,9 +2,9 @@
 
 namespace TatmanGames.Character.Interfaces
 {
-    public interface INpcSpawnController
+    public interface ISpawnController
     {
-        bool CanSpawnAtStartup(INpcSpawnPoint point);
+        bool CanSpawnAtStartup(ISpawnPoint point);
         GameObject[] GetAllNpcSpawnPoints();
     }
 }

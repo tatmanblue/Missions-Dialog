@@ -2,11 +2,11 @@
 using TatmanGames.Character.Scriptables;
 using UnityEngine;
 
-namespace TatmanGames.Character.NPC
+namespace TatmanGames.Character.Spawning
 {
-    public class NPCSpawnPoint : MonoBehaviour, INpcSpawnPoint
+    public class SpawnPoint : MonoBehaviour, ISpawnPoint
     {
-        public INpcSpawnData Data
+        public ISpawnData Data
         {
             get
             {
@@ -15,6 +15,6 @@ namespace TatmanGames.Character.NPC
             
         }
         
-        [SerializeField] private NPCSpawnData spawnData;
+        [SerializeField] private SpawnData spawnData;
     }
 }

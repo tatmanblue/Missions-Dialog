@@ -6,20 +6,20 @@ using UnityEngine;
 
 namespace TatmanGames.Missions.NPC
 {
-    public class DialogNpcSpawnController : INpcSpawnController
+    public class DialogNpcSpawnController : ISpawnController
     {
-        public bool CanSpawnAtStartup(INpcSpawnPoint point)
+        public bool CanSpawnAtStartup(ISpawnPoint point)
         {
-            IDialogNpcSpawnData data = point.Data as IDialogNpcSpawnData;
+            ISpawnData data = point.Data as ISpawnData;
             if (null == data)
                 return true;
 
-            return data.AutomaticSpawning;
+            return data.SpawnOnStart;
         }
 
         public GameObject[] GetAllNpcSpawnPoints()
         {
-            INpcEngine engine = GlobalServicesLocator.Instance.GetService<INpcEngine>();
+            ISpawnEngine engine = GlobalServicesLocator.Instance.GetService<ISpawnEngine>();
             return GameObject.FindGameObjectsWithTag(engine?.SpawnTag);
         }
     }
