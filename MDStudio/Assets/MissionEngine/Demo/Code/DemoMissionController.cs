@@ -1,11 +1,11 @@
 ﻿using System;
-using TatmanGames.Common;
-using TatmanGames.Common.ServiceLocator;
-using TatmanGames.Missions.Interfaces;
-using TatmanGames.ScreenUI.Scene;
 using TMPro;
 using UnityEngine;
-using ILogger = TatmanGames.ScreenUI.Interfaces.ILogger;
+using TatmanGames.Common;
+using TatmanGames.Common.Scene;
+using TatmanGames.Common.ServiceLocator;
+using TatmanGames.Missions.Interfaces;
+using ILogger = TatmanGames.Common.Interfaces.ILogger;
 
 namespace TatmanGames.Missions.Demo
 {
