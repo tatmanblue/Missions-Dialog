@@ -24,6 +24,8 @@ namespace TatmanGames.Missions.Scriptables
 
         public string Description => description;
 
+        public bool ShowUIOnActivate => showUIOnActivate;
+
         public bool IsCompleted()
         {
             return this.CheckIsComplete();
@@ -48,6 +50,7 @@ namespace TatmanGames.Missions.Scriptables
         [SerializeField] private MissionData mission;
         [SerializeField] private string uuid = Guid.NewGuid().ToString();
         [SerializeField] private string missionStepName;
+        [SerializeField] private bool showUIOnActivate = true;
         [TextArea(3, 10)][SerializeField] private string description;
 
         #endregion

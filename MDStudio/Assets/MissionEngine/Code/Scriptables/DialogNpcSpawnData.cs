@@ -6,34 +6,30 @@ using UnityEngine;
 
 namespace TatmanGames.Missions.Scriptables
 {
-    [CreateAssetMenu(fileName = "DialogSpawnData", menuName = "Tatman Games/Dialog NPC Spawn Data")]
-    public class DialogNpcSpawnData : ScriptableObject, ISpawnData
+    /// <summary>
+    /// Ties spawn data to a mission so that mission controller can activate/deactivate the spawn
+    /// as needed by the mission progress 
+    /// </summary>
+    [CreateAssetMenu(fileName = "MissionSpawnData", menuName = "Tatman Games/Mission Spawn Data")]
+    public class DialogNpcSpawnData : ScriptableObject, ISpawnData, IMissionSpawnData
     {
-        public int Id
-        {
-            get { return id; }
-        }
+        public int Id => id;
 
-        public bool SpawnOnStart
-        {
-            get { return automaticSpawning; }
-        }
+        public bool SpawnOnStart => automaticSpawning;
+        
+        public int MissionId => missionId;
 
-        public bool DestroyPointOnSpawn
-        {
-            get { return true; }
-        }
+        public int MissionStepId => missionStepId;
 
-        public GameObject SpawnableObject 
-        {
-            get
-            {
-                return npcAvatar;
-            }
-        }
+        public bool DestroyPointOnSpawn => true;
+
+        public GameObject SpawnableObject => npcAvatar;
         
         [SerializeField] private int id;
         [SerializeField] private GameObject npcAvatar;
         [SerializeField] private bool automaticSpawning;
+        [SerializeField] private int missionId = -1;
+        [SerializeField] private int missionStepId = -1;
+
     }
 }

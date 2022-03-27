@@ -14,6 +14,7 @@ namespace TatmanGames.Missions.Interfaces
         string Uuid { get; }
         string Name { get; }
         string Description { get; }
+        bool ShowUIOnActivate { get; }
 
         /// <summary>
         /// allows references to query state of the mission step

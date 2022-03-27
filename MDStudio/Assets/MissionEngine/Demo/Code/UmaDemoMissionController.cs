@@ -120,8 +120,9 @@ namespace TatmanGames.Missions.Demo
 
         private void OnMissionStepStarted(IMissionStep s)
         {
-            SetMissionMessage($"mission {s.Name}({s.MissionId}.{s.Id}) started.");
-            ShowMissionDialog(null, s);
+            SetMissionMessage($"mission {s.Name}({s.MissionId}.{s.Id}) started. Dialogs is {s.ShowUIOnActivate}.");
+            if (true == s.ShowUIOnActivate)
+                ShowMissionDialog(null, s);
         }
 
         private void OnMissionStarted(IMission m)
