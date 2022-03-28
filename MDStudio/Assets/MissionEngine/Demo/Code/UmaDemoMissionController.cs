@@ -123,6 +123,33 @@ namespace TatmanGames.Missions.Demo
             SetMissionMessage($"mission {s.Name}({s.MissionId}.{s.Id}) started. Dialogs is {s.ShowUIOnActivate}.");
             if (true == s.ShowUIOnActivate)
                 ShowMissionDialog(null, s);
+            
+            // don't like this but this is the mission controller so it would be
+            // entry point for making decisions like this below.  
+            // TODO: rethink who owns this
+            if (s.Id == 1 && s.MissionId == 2)
+            {
+                ISpawnController controller = GlobalServicesLocator.Instance.GetService<ISpawnController>();
+                foreach (GameObject pointData in controller.GetAllNpcSpawnPoints())
+                {
+                    ISpawnPoint point = pointData.GetComponent<ISpawnPoint>();
+                    ISpawnData data = point.Data;
+                    IMissionSpawnData missionData = data as IMissionSpawnData;
+                    if (null == missionData)
+                        continue;
+
+                    if (missionData.MissionId != s.MissionId)
+                        continue;
+                    if (missionData.MissionStepId != s.Id)
+                        continue;
+
+                    ISpawnEngine spawnEngine = GlobalServicesLocator.Instance.GetService<ISpawnEngine>();
+                    spawnEngine.Instantiate(pointData, point);
+                    if (true == data.DestroyPointOnSpawn)
+                        Destroy(pointData);
+                    break;
+                }
+            }
         }
 
         private void OnMissionStarted(IMission m)
